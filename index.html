@@ -411,6 +411,28 @@ nav.scrolled { background: rgba(10,22,40,.97); box-shadow: 0 1px 0 rgba(196,154,
 }
 .cdet a:hover { color: var(--accent-lt); }
 
+/* Contact form */
+.contact-form { margin: 2.5rem 0 0; max-width: 460px; }
+.contact-form .field { margin-bottom: 1rem; }
+.contact-form input,
+.contact-form textarea {
+  width: 100%; background: rgba(255,255,255,.04);
+  border: 1px solid rgba(168,205,216,.25);
+  color: var(--white); font-family: var(--sans); font-size: .9rem;
+  padding: .85rem 1rem; transition: border-color .3s, background .3s;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder { color: var(--gray); }
+.contact-form input:focus,
+.contact-form textarea:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,.06); }
+.contact-form textarea { resize: vertical; min-height: 120px; }
+.contact-form button { margin-top: .3rem; border: none; cursor: pointer; }
+.contact-form button:disabled { opacity: .55; cursor: default; transform: none; }
+.contact-form .hp { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
+.form-status { margin-top: 1rem; font-size: .82rem; line-height: 1.5; min-height: 1.2em; }
+.form-status.ok  { color: var(--accent-lt); }
+.form-status.err { color: #e2776a; }
+
 /* ═══════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════ */
@@ -767,7 +789,25 @@ footer small { font-size: .68rem; color: var(--gray); }
     <p class="sec-tag" data-i18n="contact.tag">Contato</p>
     <h2 data-i18n="contact.title">Vamos navegar juntos rumo ao próximo porto?</h2>
     <p data-i18n="contact.desc">Nossa equipe está disponível 24 horas por dia, 7 dias por semana, para atender suas necessidades de agenciamento marítimo com agilidade e profissionalismo.</p>
-    <a href="mailto:thiagobotelho@seashoresolutions.com.br" class="btn-p" data-i18n="contact.cta">Enviar Mensagem</a>
+    <form id="contactForm" class="contact-form" novalidate>
+      <!-- Web3Forms: trocar pela access key real (ver README do repo) -->
+      <input type="hidden" name="access_key" value="COLAR_ACCESS_KEY_WEB3FORMS_AQUI">
+      <input type="hidden" name="subject" value="Novo contato pelo site - SeaShore Solutions">
+      <input type="hidden" name="from_name" value="Site SeaShore Solutions">
+      <!-- honeypot anti-spam (fica oculto) -->
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="field">
+        <input type="text" name="name" id="cf-name" required data-i18n-ph="contact.form_name" placeholder="Nome">
+      </div>
+      <div class="field">
+        <input type="email" name="email" id="cf-email" required data-i18n-ph="contact.form_email" placeholder="E-mail">
+      </div>
+      <div class="field">
+        <textarea name="message" id="cf-msg" rows="4" required data-i18n-ph="contact.form_msg" placeholder="Mensagem"></textarea>
+      </div>
+      <button type="submit" class="btn-p" id="cf-submit" data-i18n="contact.cta">Enviar Mensagem</button>
+      <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
+    </form>
     <div class="contact-dets">
       <div class="cdet">
         <label data-i18n="contact.loc_label">Localização</label>
@@ -836,6 +876,10 @@ const I18N = {
     'contact.title': 'Vamos navegar juntos rumo ao próximo porto?',
     'contact.desc': 'Nossa equipe está disponível 24 horas por dia, 7 dias por semana, para atender suas necessidades de agenciamento marítimo com agilidade e profissionalismo.',
     'contact.cta': 'Enviar Mensagem',
+    'contact.form_name': 'Nome', 'contact.form_email': 'E-mail', 'contact.form_msg': 'Mensagem',
+    'contact.sending': 'Enviando...',
+    'contact.success': 'Mensagem enviada! Retornaremos em breve.',
+    'contact.error': 'Não foi possível enviar agora. Tente novamente em instantes.',
     'contact.loc_label': 'Localização', 'contact.loc_val': 'Rio de Janeiro, Brasil', 'contact.web_label': 'Website',
     'footer.about': 'Empresa', 'footer.services': 'Serviços', 'footer.areas': 'Áreas', 'footer.contact': 'Contato',
     'footer.rights': '© 2024 SeaShore Solutions. Todos os direitos reservados.'
@@ -878,6 +922,10 @@ const I18N = {
     'contact.title': 'Shall we sail together to the next port?',
     'contact.desc': 'Our team is available 24 hours a day, 7 days a week, to meet your maritime agency needs with agility and professionalism.',
     'contact.cta': 'Send Message',
+    'contact.form_name': 'Name', 'contact.form_email': 'Email', 'contact.form_msg': 'Message',
+    'contact.sending': 'Sending...',
+    'contact.success': "Message sent! We'll get back to you soon.",
+    'contact.error': 'Could not send right now. Please try again in a moment.',
     'contact.loc_label': 'Location', 'contact.loc_val': 'Rio de Janeiro, Brazil', 'contact.web_label': 'Website',
     'footer.about': 'Company', 'footer.services': 'Services', 'footer.areas': 'Areas', 'footer.contact': 'Contact',
     'footer.rights': '© 2024 SeaShore Solutions. All rights reserved.'
@@ -885,12 +933,19 @@ const I18N = {
 };
 const HTML_LANG = { pt: 'pt-BR', en: 'en' };
 
+let currentLang = 'pt';
+
 function applyLang(lang) {
   if (!I18N[lang]) lang = 'pt';
+  currentLang = lang;
   const dict = I18N[lang];
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (dict[key] != null) el.innerHTML = dict[key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (dict[key] != null) el.setAttribute('placeholder', dict[key]);
   });
   if (dict['meta.title']) document.title = dict['meta.title'];
   document.documentElement.lang = HTML_LANG[lang] || lang;
@@ -932,6 +987,44 @@ function closeDrawer() {
 }
 // close on outside tap
 drawer.addEventListener('click', e => { if (e.target === drawer) closeDrawer(); });
+
+// ═══════════════════════════════════════
+//  Contact form → Web3Forms (AJAX)
+// ═══════════════════════════════════════
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  const statusEl = document.getElementById('cf-status');
+  const submitBtn = document.getElementById('cf-submit');
+  const t = (key) => (I18N[currentLang] || I18N.pt)[key];
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    statusEl.className = 'form-status';
+    statusEl.textContent = t('contact.sending');
+    submitBtn.disabled = true;
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm)
+      });
+      const json = await res.json();
+      if (json.success) {
+        contactForm.reset();
+        statusEl.classList.add('ok');
+        statusEl.textContent = t('contact.success');
+      } else {
+        statusEl.classList.add('err');
+        statusEl.textContent = (json.message || t('contact.error'));
+      }
+    } catch (err) {
+      statusEl.classList.add('err');
+      statusEl.textContent = t('contact.error');
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+}
 
 // ── Scroll reveal ──
 const obs = new IntersectionObserver((entries) => {
