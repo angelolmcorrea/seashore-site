@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#0a1628">
+<title>SeaShore Solutions – Agência Marítima</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   RESET & TOKENS
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:        #0a1628;
+  --deep:        #0d1f3c;
+  --mid:         #14304f;
+  --accent:      #c49a3c;
+  --accent-lt:   #e8c46a;
+  --sky:         #a8cdd8;
+  --white:       #f4efe6;
+  --gray:        #7a8fa6;
+  --serif:       'Cormorant Garamond', serif;
+  --sans:        'DM Sans', sans-serif;
+  --r-nav:       clamp(1rem, 4vw, 4rem);
+  --r-sec:       clamp(3rem, 8vw, 8rem);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--sans);
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem var(--r-nav);
+  background: linear-gradient(to bottom, rgba(10,22,40,.97) 0%, rgba(10,22,40,0) 100%);
+  transition: background .4s;
+}
+nav.scrolled { background: rgba(10,22,40,.97); box-shadow: 0 1px 0 rgba(196,154,60,.12); }
+
+.nav-logo {
+  font-family: var(--serif); font-size: clamp(.9rem, 2.5vw, 1.25rem);
+  font-weight: 500; letter-spacing: .12em; color: var(--accent);
+  text-decoration: none; white-space: nowrap;
+}
+.nav-logo span { color: var(--white); font-weight: 300; }
+
+.nav-links {
+  display: flex; gap: clamp(1rem, 3vw, 2.5rem); list-style: none;
+}
+.nav-links a {
+  color: var(--gray); font-size: .73rem; letter-spacing: .14em;
+  text-transform: uppercase; text-decoration: none; transition: color .25s;
+}
+.nav-links a:hover { color: var(--accent-lt); }
+
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+
+/* Language switch */
+.lang-switch { display: flex; align-items: center; gap: 0; border: 1px solid var(--accent); }
+.lang-btn {
+  font-family: var(--sans); font-size: .7rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent);
+  background: none; border: none; cursor: pointer;
+  padding: .32rem .7rem; transition: all .3s; line-height: 1;
+}
+.lang-btn + .lang-btn { border-left: 1px solid var(--accent); }
+.lang-btn:hover { color: var(--accent-lt); }
+.lang-btn.active { background: var(--accent); color: var(--navy); }
+
+/* Hamburger */
+.ham {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px; background: none; border: none;
+}
+.ham span {
+  display: block; width: 24px; height: 1.5px;
+  background: var(--white); transition: all .35s;
+  transform-origin: center;
+}
+.ham.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.ham.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.ham.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile drawer */
+.nav-drawer {
+  display: none; position: fixed; inset: 0; z-index: 190;
+  background: rgba(10,22,40,.98); flex-direction: column;
+  align-items: center; justify-content: center; gap: 2.5rem;
+  opacity: 0; pointer-events: none; transition: opacity .35s;
+}
+.nav-drawer.open { opacity: 1; pointer-events: all; }
+.nav-drawer a {
+  font-family: var(--serif); font-size: 2rem; font-weight: 300;
+  letter-spacing: .06em; color: var(--white); text-decoration: none;
+  transition: color .25s;
+}
+.nav-drawer a:hover { color: var(--accent-lt); }
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  position: relative; min-height: 100svh;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--r-nav) clamp(4rem, 10vw, 8rem);
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    linear-gradient(175deg, rgba(10,22,40,.25) 0%, rgba(10,22,40,.88) 60%, var(--navy) 100%),
+    url('assets/img/BunkeringAreas-RiodeJaneiroInnerRoads.jpg')
+    center/cover no-repeat;
+}
+.hero-wave {
+  position: absolute; bottom: -1px; left: 0; right: 0; z-index: 1;
+}
+.hero-wave svg { display: block; width: 100%; }
+
+.hero-content { position: relative; z-index: 2; max-width: 820px; }
+.eyebrow {
+  font-size: clamp(.65rem,.9vw+.5rem,.75rem); letter-spacing: .22em;
+  text-transform: uppercase; color: var(--accent);
+  display: flex; align-items: center; gap: .9rem; margin-bottom: 1.2rem;
+}
+.eyebrow::before { content:''; display:block; width:36px; height:1px; background:var(--accent); flex-shrink:0; }
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 7vw, 5.2rem);
+  font-weight: 300; line-height: 1.1;
+  margin-bottom: clamp(1rem, 2.5vw, 1.8rem);
+}
+.hero h1 em { font-style: italic; color: var(--accent-lt); }
+.hero-desc {
+  font-size: clamp(.85rem, 1.3vw, 1rem);
+  color: var(--sky); line-height: 1.75;
+  max-width: 520px; margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.ctas { display: flex; flex-wrap: wrap; gap: 1rem; }
+.btn-p {
+  background: var(--accent); color: var(--navy);
+  padding: .9rem 2.2rem; font-size: .78rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  text-decoration: none; font-weight: 500;
+  transition: all .3s; white-space: nowrap;
+}
+.btn-p:hover { background: var(--accent-lt); transform: translateY(-2px); }
+.btn-g {
+  border: 1px solid rgba(168,205,216,.4); color: var(--sky);
+  padding: .9rem 2.2rem; font-size: .78rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  text-decoration: none; transition: all .3s; white-space: nowrap;
+}
+.btn-g:hover { border-color: var(--sky); color: var(--white); }
+
+.scroll-hint {
+  position: absolute; bottom: 2.5rem; right: var(--r-nav); z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gray);
+}
+.scroll-line {
+  width: 1px; height: 52px;
+  background: linear-gradient(to bottom, transparent, var(--accent));
+  animation: dropLine 1.9s ease-in-out infinite;
+}
+@keyframes dropLine {
+  0%,100%{transform:scaleY(.2);transform-origin:top;opacity:0}
+  50%{transform:scaleY(1);opacity:1}
+}
+
+/* ═══════════════════════════════════════
+   STATS BAR
+═══════════════════════════════════════ */
+.stats {
+  background: var(--deep);
+  border-top: 1px solid rgba(196,154,60,.18);
+  border-bottom: 1px solid rgba(196,154,60,.18);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat {
+  padding: clamp(1.5rem, 3vw, 2.5rem) 1.5rem;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,.06);
+}
+.stat:last-child { border-right: none; }
+.stat-n {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300; color: var(--accent); line-height: 1;
+}
+.stat-l {
+  font-size: clamp(.6rem,.7rem + .1vw,.7rem);
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--gray); margin-top: .45rem;
+}
+
+/* ═══════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════ */
+.about {
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.about-img {
+  position: relative; min-height: 560px;
+  background: url('assets/img/TTRJ-DischWheat-RiodeJaneiroPort-4.jpg')
+    center/cover no-repeat;
+}
+.about-img::after {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(to right, transparent 55%, var(--navy));
+}
+.about-yr {
+  position: absolute; bottom: 2.5rem; left: 2.5rem; z-index: 2;
+  font-family: var(--serif); font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 300; color: rgba(196,154,60,.2); line-height: 1;
+  user-select: none; pointer-events: none;
+}
+.about-text {
+  background: var(--deep);
+  padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 5vw, 5rem);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.sec-tag {
+  font-size: .68rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.4rem;
+}
+.about-text h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 3vw, 2.8rem);
+  font-weight: 300; line-height: 1.25; margin-bottom: 1.8rem;
+}
+.about-text p {
+  color: var(--gray); line-height: 1.85;
+  font-size: clamp(.82rem, 1.2vw, .95rem);
+  margin-bottom: 1.2rem;
+}
+.divider { width: 44px; height: 2px; background: var(--accent); margin: 2rem 0; }
+.vals {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;
+}
+.val {
+  border-left: 2px solid var(--accent); padding-left: .9rem;
+}
+.val strong {
+  display: block; font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--accent-lt); margin-bottom: .25rem;
+}
+.val span { font-size: .83rem; color: var(--gray); }
+
+/* ═══════════════════════════════════════
+   SERVICES
+═══════════════════════════════════════ */
+.services {
+  padding: var(--r-sec) var(--r-nav);
+}
+.sec-hdr {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 2rem; flex-wrap: wrap;
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+.sec-hdr h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 300; max-width: 480px; line-height: 1.2;
+}
+.sec-hdr p { color: var(--gray); max-width: 260px; font-size: .88rem; line-height: 1.6; }
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: rgba(255,255,255,.06);
+}
+.svc-card {
+  background: var(--navy); padding: clamp(1.8rem, 3vw, 3rem) clamp(1.5rem, 2.5vw, 2.5rem);
+  position: relative; overflow: hidden; transition: background .4s;
+}
+.svc-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width .45s ease;
+}
+.svc-card:hover { background: var(--deep); }
+.svc-card:hover::after { width: 100%; }
+.svc-ico {
+  width: 44px; height: 44px; margin-bottom: 1.6rem; color: var(--accent);
+}
+.svc-card h3 {
+  font-family: var(--serif); font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  font-weight: 400; margin-bottom: .8rem;
+}
+.svc-card p { color: var(--gray); font-size: clamp(.78rem, 1vw, .88rem); line-height: 1.7; }
+.svc-n {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 300; color: rgba(196,154,60,.08); line-height: 1;
+  user-select: none;
+}
+
+/* ═══════════════════════════════════════
+   GALLERY
+═══════════════════════════════════════ */
+.gallery {
+  padding: 0 var(--r-nav) var(--r-sec);
+}
+.gallery-lbl {
+  font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.5rem;
+}
+.g-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 220px 220px;
+  gap: 5px;
+}
+.g-item {
+  position: relative; overflow: hidden; background: var(--deep);
+}
+.g-item:first-child { grid-row: 1 / 3; }
+.g-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .55s ease, filter .4s;
+  filter: brightness(.8) saturate(.75);
+}
+.g-item:hover img { transform: scale(1.07); filter: brightness(1) saturate(1); }
+.g-lbl {
+  position: absolute; bottom: .7rem; left: .9rem;
+  font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent-lt); text-shadow: 0 1px 8px rgba(0,0,0,.8);
+}
+
+/* ═══════════════════════════════════════
+   AREAS
+═══════════════════════════════════════ */
+.areas {
+  padding: var(--r-sec) var(--r-nav);
+  background: var(--deep);
+}
+.areas-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem; margin-top: clamp(2.5rem, 4vw, 4rem);
+}
+.area-card {
+  border: 1px solid rgba(255,255,255,.08);
+  padding: clamp(1.5rem, 2.5vw, 2.5rem) clamp(1.2rem, 2vw, 2rem);
+  transition: border-color .3s, transform .3s;
+}
+.area-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.area-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-bottom: 1.3rem; }
+.area-card h4 {
+  font-family: var(--serif); font-size: clamp(1rem, 1.3vw, 1.15rem);
+  font-weight: 400; margin-bottom: .7rem;
+}
+.area-card p { font-size: clamp(.75rem, 1vw, .83rem); color: var(--gray); line-height: 1.65; }
+
+/* ═══════════════════════════════════════
+   CERTS
+═══════════════════════════════════════ */
+.certs {
+  padding: 4rem var(--r-nav);
+  display: flex; align-items: center; gap: 4rem; flex-wrap: wrap;
+  border-top: 1px solid rgba(255,255,255,.06);
+  background: var(--deep);
+}
+.certs-lbl { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gray); white-space: nowrap; }
+.certs-logos { display: flex; gap: 3rem; align-items: center; flex-wrap: wrap; }
+.certs-logos img { height: 64px; opacity: .55; filter: grayscale(1); transition: all .3s; }
+.certs-logos img:hover { opacity: 1; filter: none; }
+
+/* ═══════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════ */
+.contact {
+  position: relative;
+  padding: var(--r-sec) var(--r-nav);
+  background:
+    linear-gradient(140deg, rgba(10,22,40,.97) 55%, rgba(10,22,40,.82)),
+    url('assets/img/CSNTerminal-Berth101DischCoal102LoadIronOre.jpg')
+    center/cover no-repeat;
+}
+.contact-inner { max-width: 580px; }
+.contact h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300; line-height: 1.2; margin-bottom: 1.3rem;
+}
+.contact p { color: var(--gray); line-height: 1.75; font-size: clamp(.85rem, 1.2vw, .95rem); margin-bottom: 2.5rem; }
+.contact-dets {
+  display: flex; flex-wrap: wrap; gap: 3rem; margin-top: 3rem;
+}
+.cdet label {
+  display: block; font-size: .62rem; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: .35rem;
+}
+.cdet a, .cdet span {
+  font-size: .9rem; color: var(--white); text-decoration: none; transition: color .3s;
+}
+.cdet a:hover { color: var(--accent-lt); }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  background: var(--navy);
+  border-top: 1px solid rgba(196,154,60,.13);
+  padding: 2.5rem var(--r-nav);
+  display: flex; flex-wrap: wrap;
+  justify-content: space-between; align-items: center;
+  gap: 1.5rem;
+}
+.f-logo {
+  font-family: var(--serif); font-size: 1.05rem;
+  font-weight: 500; letter-spacing: .12em; color: var(--accent);
+}
+.f-logo span { color: var(--gray); font-weight: 300; }
+.f-nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.f-nav a {
+  font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--gray); text-decoration: none; transition: color .3s;
+}
+.f-nav a:hover { color: var(--accent); }
+footer small { font-size: .68rem; color: var(--gray); }
+
+/* ═══════════════════════════════════════
+   SCROLL ANIMATIONS
+═══════════════════════════════════════ */
+.fade-up {
+  opacity: 0; transform: translateY(26px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.fade-up.vis { opacity: 1; transform: none; }
+.fade-up.d1 { transition-delay: .1s; }
+.fade-up.d2 { transition-delay: .2s; }
+.fade-up.d3 { transition-delay: .3s; }
+
+/* ═══════════════════════════════════════
+   ── RESPONSIVE ──
+═══════════════════════════════════════ */
+
+/* Tablet landscape: hide some links, keep most layout */
+@media (max-width: 1100px) {
+  .svc-grid { grid-template-columns: 1fr 1fr; }
+  .areas-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* Tablet portrait */
+@media (max-width: 860px) {
+  /* Nav: show hamburger, hide links */
+  .nav-links { display: none; }
+  .ham { display: flex; }
+  .nav-drawer { display: flex; }
+
+  /* About stacked */
+  .about { grid-template-columns: 1fr; }
+  .about-img { min-height: 300px; }
+  .about-img::after { background: linear-gradient(to bottom, transparent 60%, var(--navy)); }
+
+  /* Stats 2-col */
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat { border-right: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); }
+  .stat:nth-child(2n) { border-right: none; }
+  .stat:nth-last-child(-n+2) { border-bottom: none; }
+
+  /* Gallery simpler */
+  .g-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 180px);
+  }
+  .g-item:first-child { grid-row: auto; }
+
+  /* Section header stack */
+  .sec-hdr { flex-direction: column; align-items: flex-start; }
+  .sec-hdr p { max-width: 100%; }
+
+  /* hide scroll hint on small */
+  .scroll-hint { display: none; }
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+  :root { --r-nav: 1.2rem; --r-sec: 3.5rem; }
+
+  .stats { grid-template-columns: 1fr 1fr; }
+
+  .svc-grid { grid-template-columns: 1fr; gap: 0; }
+  .svc-card { border-bottom: 1px solid rgba(255,255,255,.06); }
+
+  .areas-grid { grid-template-columns: 1fr; }
+
+  .g-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 200px);
+  }
+  .g-item:nth-child(n+6) { display: none; }
+
+  .vals { grid-template-columns: 1fr; }
+
+  .certs { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+
+  .contact-dets { flex-direction: column; gap: 1.5rem; }
+
+  footer { flex-direction: column; text-align: center; }
+  .f-nav { justify-content: center; }
+
+  .hero h1 { font-size: clamp(2rem, 9vw, 2.8rem); }
+  .hero-desc { font-size: .87rem; }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .stats { grid-template-columns: 1fr; }
+  .stat { border-right: none; }
+  .ctas { flex-direction: column; }
+  .btn-p, .btn-g { text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">SeaShore <span>Solutions</span></a>
+  <ul class="nav-links">
+    <li><a href="#about"    data-i18n="nav.about">A Empresa</a></li>
+    <li><a href="#services" data-i18n="nav.services">Serviços</a></li>
+    <li><a href="#areas"    data-i18n="nav.areas">Áreas</a></li>
+    <li><a href="#contact"  data-i18n="nav.contact">Contato</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switch" role="group" aria-label="Idioma / Language">
+      <button type="button" class="lang-btn" data-lang="pt" aria-label="Português">PT</button>
+      <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+    </div>
+    <button class="ham" id="hamBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav-drawer" id="drawer">
+  <a href="#about"    onclick="closeDrawer()" data-i18n="nav.about">A Empresa</a>
+  <a href="#services" onclick="closeDrawer()" data-i18n="nav.services">Serviços</a>
+  <a href="#areas"    onclick="closeDrawer()" data-i18n="nav.areas">Áreas</a>
+  <a href="#contact"  onclick="closeDrawer()" data-i18n="nav.contact">Contato</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,80 C360,140 720,20 1080,80 C1260,110 1380,60 1440,80 L1440,140 L0,140 Z" fill="#0a1628" opacity=".85"/>
+      <path d="M0,105 C300,70 700,130 1080,100 C1260,85 1380,110 1440,100 L1440,140 L0,140 Z" fill="#0a1628"/>
+    </svg>
+  </div>
+  <div class="hero-content fade-up" id="heroContent">
+    <p class="eyebrow" data-i18n="hero.eyebrow">Agência Marítima · Rio de Janeiro</p>
+    <h1 data-i18n="hero.title">Soluções que navegam<br>além do <em>horizonte</em></h1>
+    <p class="hero-desc" data-i18n="hero.desc">Desde 2013 conectamos armadores, terminais e operadores com excelência em agenciamento marítimo — unindo décadas de experiência à agilidade do novo shipping.</p>
+    <div class="ctas">
+      <a href="#services" class="btn-p" data-i18n="hero.cta1">Nossos Serviços</a>
+      <a href="#contact"  class="btn-g" data-i18n="hero.cta2">Fale Conosco</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span data-i18n="hero.scroll">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div class="stats fade-up">
+  <div class="stat"><div class="stat-n">+40</div><div class="stat-l" data-i18n="stats.exp">Anos de experiência</div></div>
+  <div class="stat"><div class="stat-n">2013</div><div class="stat-l" data-i18n="stats.founded">Fundação</div></div>
+  <div class="stat"><div class="stat-n">RJ</div><div class="stat-l" data-i18n="stats.port">Porto do Rio de Janeiro</div></div>
+  <div class="stat"><div class="stat-n">360°</div><div class="stat-l" data-i18n="stats.solutions">Soluções integradas</div></div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="about-img">
+    <div class="about-yr">2013</div>
+  </div>
+  <div class="about-text fade-up">
+    <p class="sec-tag" data-i18n="about.tag">A Empresa</p>
+    <h2 data-i18n="about.title">Experiência consolidada.<br>Olhar renovador.</h2>
+    <p data-i18n="about.p1">Fundada em 2013, a SeaShore Solutions nasceu com o propósito de oferecer ao mercado um novo conceito de agência marítima — aliando profissionais com mais de 40 anos de experiência ao dinamismo de uma nova geração no shipping.</p>
+    <p data-i18n="about.p2">Hoje somos uma central de negócios e soluções para o mercado marítimo local, integrando know-how, novas tecnologias e tendências do segmento.</p>
+    <div class="divider"></div>
+    <p class="sec-tag" data-i18n="about.mission_tag">Missão</p>
+    <p data-i18n="about.mission">Otimizar o agenciamento marítimo somando experiência e inovação, buscando soluções logísticas que agilizem e agreguem qualidade às operações portuárias.</p>
+    <div class="vals">
+      <div class="val"><strong data-i18n="about.v1t">Respeito</strong><span data-i18n="about.v1d">Clientes, parceiros e colaboradores</span></div>
+      <div class="val"><strong data-i18n="about.v2t">Capacitação</strong><span data-i18n="about.v2d">Treinamento contínuo</span></div>
+      <div class="val"><strong data-i18n="about.v3t">Equipe</strong><span data-i18n="about.v3d">Trabalho colaborativo</span></div>
+      <div class="val"><strong data-i18n="about.v4t">Sustentabilidade</strong><span data-i18n="about.v4d">Responsabilidade socioambiental</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="services" id="services">
+  <div class="sec-hdr fade-up">
+    <h2 data-i18n="svc.title">Serviços especializados para o mercado marítimo</h2>
+    <p data-i18n="svc.sub">Soluções completas de agenciamento com equipe capacitada e equipamentos de ponta.</p>
+  </div>
+  <div class="svc-grid">
+
+    <div class="svc-card fade-up">
+      <span class="svc-n">01</span>
+      <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 36 L8 28 L24 24 L40 28 L42 36 Z"/>
+        <path d="M14 28 L14 20 L24 16 L34 20 L34 28"/>
+        <path d="M24 16 L24 9"/><path d="M20 10 L28 10"/>
+        <line x1="6" y1="40" x2="42" y2="40"/>
+      </svg>
+      <h3 data-i18n="svc.1t">Agenciamento Geral</h3>
+      <p data-i18n="svc.1d">Representação completa de armadores nos portos do Rio de Janeiro, Itaguaí e região, com atendimento 24h.</p>
+    </div>
+
+    <div class="svc-card fade-up d1">
+      <span class="svc-n">02</span>
+      <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="8" y="20" width="32" height="16" rx="2"/>
+        <path d="M8 28 L40 28"/>
+        <path d="M14 20 L14 13 L34 13 L34 20"/>
+        <circle cx="16" cy="36" r="3"/><circle cx="32" cy="36" r="3"/>
+      </svg>
+      <h3 data-i18n="svc.2t">Operações Portuárias</h3>
+      <p data-i18n="svc.2d">Coordenação de cargas breakbulk, granéis sólidos, produtos siderúrgicos, grãos e carvão.</p>
+    </div>
+
+    <div class="svc-card fade-up d2">
+      <span class="svc-n">03</span>
+      <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="24" cy="24" r="14"/>
+        <path d="M10 24 Q17 18 24 24 Q31 30 38 24"/>
+        <line x1="24" y1="10" x2="24" y2="38"/>
+      </svg>
+      <h3 data-i18n="svc.3t">Bunkering</h3>
+      <p data-i18n="svc.3d">Suporte completo em operações de abastecimento de combustível nas Inner Roads e portos da região sudeste.</p>
+    </div>
+
+    <div class="svc-card fade-up">
+      <span class="svc-n">04</span>
+      <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 38 L12 22 L24 14 L36 22 L36 38"/>
+        <rect x="20" y="28" width="8" height="10"/>
+        <path d="M8 22 L24 12 L40 22"/>
+      </svg>
+      <h3 data-i18n="svc.4t">Agências Diplomáticas</h3>
+      <p data-i18n="svc.4d">Serviços especializados para embarcações de bandeira estrangeira, iates e navios em missão diplomática.</p>
+    </div>
+
+    <div class="svc-card fade-up d1">
+      <span class="svc-n">05</span>
+      <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 32 L8 18 L40 18 L40 32"/>
+        <path d="M4 32 L44 32"/>
+        <path d="M14 18 L14 10 L34 10 L34 18"/>
+        <line x1="24" y1="10" x2="24" y2="4"/>
+        <path d="M20 4 L28 4"/>
+      </svg>
+      <h3 data-i18n="svc.5t">Logística Integrada</h3>
+      <p data-i18n="svc.5d">Soluções customizadas de logística portuária, gestão documental e despacho aduaneiro especializado.</p>
+    </div>
+
+    <div class="svc-card fade-up d2">
+      <span class="svc-n">06</span>
+      <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="24" cy="20" r="8"/>
+        <path d="M12 40 C12 32 36 32 36 40"/>
+        <path d="M36 14 C40 16 42 23 40 30"/>
+        <path d="M12 14 C8 16 6 23 8 30"/>
+      </svg>
+      <h3 data-i18n="svc.6t">Suporte 24/7</h3>
+      <p data-i18n="svc.6d">Equipe disponível a qualquer hora para atender emergências e necessidades operacionais urgentes.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section class="gallery">
+  <div class="gallery-lbl fade-up" data-i18n="gallery.lbl">— Operações</div>
+  <div class="g-grid fade-up">
+    <div class="g-item">
+      <img src="assets/img/BunkeringAreas-RiodeJaneiroInnerRoads.jpg" alt="Bunkering" loading="lazy">
+      <span class="g-lbl">Bunkering · Inner Roads</span>
+    </div>
+    <div class="g-item">
+      <img src="assets/img/TTRJ-DischWheat-RiodeJaneiroPort-4.jpg" alt="Grãos" loading="lazy">
+      <span class="g-lbl">Disch Grains</span>
+    </div>
+    <div class="g-item">
+      <img src="assets/img/ComercialQuayShed7-LoadWireRodCoils-RiodeJaneiroPort-1.jpg" alt="Steel" loading="lazy">
+      <span class="g-lbl">Steel Products</span>
+    </div>
+    <div class="g-item">
+      <img src="assets/img/CSNTerminal-Berth101DischCoal102LoadIronOre.jpg" alt="Coal" loading="lazy">
+      <span class="g-lbl">Disch Coal · CSN</span>
+    </div>
+    <div class="g-item">
+      <img src="assets/img/MarinadaGloria-French-schooner-RiodeJaneiro.jpg" alt="Diplomatic" loading="lazy">
+      <span class="g-lbl">Diplomatic</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── AREAS ── -->
+<section class="areas" id="areas">
+  <div class="sec-hdr fade-up">
+    <h2 data-i18n="areas.title">Áreas de atuação</h2>
+    <p data-i18n="areas.sub">Presença estratégica nos principais terminais e rotas do sudeste.</p>
+  </div>
+  <div class="areas-grid">
+    <div class="area-card fade-up">
+      <div class="area-dot"></div>
+      <h4 data-i18n="areas.1t">Porto do Rio de Janeiro</h4>
+      <p data-i18n="areas.1d">Operações no Cais Comercial, terminais de granéis e carga geral, com acesso a todos os berços.</p>
+    </div>
+    <div class="area-card fade-up d1">
+      <div class="area-dot"></div>
+      <h4 data-i18n="areas.2t">Porto de Itaguaí</h4>
+      <p data-i18n="areas.2d">Atendimento nos terminais CSN, Ternium, TECON e Sepetiba para cargas pesadas e contêineres.</p>
+    </div>
+    <div class="area-card fade-up d2">
+      <div class="area-dot"></div>
+      <h4 data-i18n="areas.3t">Marina da Glória</h4>
+      <p data-i18n="areas.3d">Suporte a iates, embarcações de recreio e navios diplomáticos na Baía de Guanabara.</p>
+    </div>
+    <div class="area-card fade-up d3">
+      <div class="area-dot"></div>
+      <h4 data-i18n="areas.4t">Inner Roads RJ</h4>
+      <p data-i18n="areas.4d">Operações de bunkering e suprimentos em ancoragem nas águas internas da Baía.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CERTS ── -->
+<div class="certs fade-up">
+  <span class="certs-lbl" data-i18n="certs.lbl">Certificações &amp; Parcerias</span>
+  <div class="certs-logos">
+    <img src="assets/img/Selo-Fenamar.png" alt="Fenamar" loading="lazy">
+    <img src="assets/img/Selo-Quality.png" alt="Quality" loading="lazy">
+  </div>
+</div>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div class="contact-inner fade-up">
+    <p class="sec-tag" data-i18n="contact.tag">Contato</p>
+    <h2 data-i18n="contact.title">Vamos navegar juntos rumo ao próximo porto?</h2>
+    <p data-i18n="contact.desc">Nossa equipe está disponível 24 horas por dia, 7 dias por semana, para atender suas necessidades de agenciamento marítimo com agilidade e profissionalismo.</p>
+    <a href="mailto:thiagobotelho@seashoresolutions.com.br" class="btn-p" data-i18n="contact.cta">Enviar Mensagem</a>
+    <div class="contact-dets">
+      <div class="cdet">
+        <label data-i18n="contact.loc_label">Localização</label>
+        <span data-i18n="contact.loc_val">Rio de Janeiro, Brasil</span>
+      </div>
+      <div class="cdet">
+        <label data-i18n="contact.web_label">Website</label>
+        <a href="https://seashoresolutions.com.br">seashoresolutions.com.br</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="f-logo">SeaShore <span>Solutions</span></div>
+  <nav class="f-nav">
+    <a href="#about"    data-i18n="footer.about">Empresa</a>
+    <a href="#services" data-i18n="footer.services">Serviços</a>
+    <a href="#areas"    data-i18n="footer.areas">Áreas</a>
+    <a href="#contact"  data-i18n="footer.contact">Contato</a>
+  </nav>
+  <small data-i18n="footer.rights">© 2024 SeaShore Solutions. Todos os direitos reservados.</small>
+</footer>
+
+<script>
+// ═══════════════════════════════════════
+//  i18n — toggle PT/EN (botões no canto sup. direito)
+// ═══════════════════════════════════════
+const I18N = {
+  pt: {
+    'meta.title': 'SeaShore Solutions – Agência Marítima',
+    'nav.about': 'A Empresa', 'nav.services': 'Serviços', 'nav.areas': 'Áreas', 'nav.contact': 'Contato',
+    'hero.eyebrow': 'Agência Marítima · Rio de Janeiro',
+    'hero.title': 'Soluções que navegam<br>além do <em>horizonte</em>',
+    'hero.desc': 'Desde 2013 conectamos armadores, terminais e operadores com excelência em agenciamento marítimo — unindo décadas de experiência à agilidade do novo shipping.',
+    'hero.cta1': 'Nossos Serviços', 'hero.cta2': 'Fale Conosco', 'hero.scroll': 'Scroll',
+    'stats.exp': 'Anos de experiência', 'stats.founded': 'Fundação', 'stats.port': 'Porto do Rio de Janeiro', 'stats.solutions': 'Soluções integradas',
+    'about.tag': 'A Empresa',
+    'about.title': 'Experiência consolidada.<br>Olhar renovador.',
+    'about.p1': 'Fundada em 2013, a SeaShore Solutions nasceu com o propósito de oferecer ao mercado um novo conceito de agência marítima — aliando profissionais com mais de 40 anos de experiência ao dinamismo de uma nova geração no shipping.',
+    'about.p2': 'Hoje somos uma central de negócios e soluções para o mercado marítimo local, integrando know-how, novas tecnologias e tendências do segmento.',
+    'about.mission_tag': 'Missão',
+    'about.mission': 'Otimizar o agenciamento marítimo somando experiência e inovação, buscando soluções logísticas que agilizem e agreguem qualidade às operações portuárias.',
+    'about.v1t': 'Respeito', 'about.v1d': 'Clientes, parceiros e colaboradores',
+    'about.v2t': 'Capacitação', 'about.v2d': 'Treinamento contínuo',
+    'about.v3t': 'Equipe', 'about.v3d': 'Trabalho colaborativo',
+    'about.v4t': 'Sustentabilidade', 'about.v4d': 'Responsabilidade socioambiental',
+    'svc.title': 'Serviços especializados para o mercado marítimo',
+    'svc.sub': 'Soluções completas de agenciamento com equipe capacitada e equipamentos de ponta.',
+    'svc.1t': 'Agenciamento Geral', 'svc.1d': 'Representação completa de armadores nos portos do Rio de Janeiro, Itaguaí e região, com atendimento 24h.',
+    'svc.2t': 'Operações Portuárias', 'svc.2d': 'Coordenação de cargas breakbulk, granéis sólidos, produtos siderúrgicos, grãos e carvão.',
+    'svc.3t': 'Bunkering', 'svc.3d': 'Suporte completo em operações de abastecimento de combustível nas Inner Roads e portos da região sudeste.',
+    'svc.4t': 'Agências Diplomáticas', 'svc.4d': 'Serviços especializados para embarcações de bandeira estrangeira, iates e navios em missão diplomática.',
+    'svc.5t': 'Logística Integrada', 'svc.5d': 'Soluções customizadas de logística portuária, gestão documental e despacho aduaneiro especializado.',
+    'svc.6t': 'Suporte 24/7', 'svc.6d': 'Equipe disponível a qualquer hora para atender emergências e necessidades operacionais urgentes.',
+    'gallery.lbl': '— Operações',
+    'areas.title': 'Áreas de atuação',
+    'areas.sub': 'Presença estratégica nos principais terminais e rotas do sudeste.',
+    'areas.1t': 'Porto do Rio de Janeiro', 'areas.1d': 'Operações no Cais Comercial, terminais de granéis e carga geral, com acesso a todos os berços.',
+    'areas.2t': 'Porto de Itaguaí', 'areas.2d': 'Atendimento nos terminais CSN, Ternium, TECON e Sepetiba para cargas pesadas e contêineres.',
+    'areas.3t': 'Marina da Glória', 'areas.3d': 'Suporte a iates, embarcações de recreio e navios diplomáticos na Baía de Guanabara.',
+    'areas.4t': 'Inner Roads RJ', 'areas.4d': 'Operações de bunkering e suprimentos em ancoragem nas águas internas da Baía.',
+    'certs.lbl': 'Certificações &amp; Parcerias',
+    'contact.tag': 'Contato',
+    'contact.title': 'Vamos navegar juntos rumo ao próximo porto?',
+    'contact.desc': 'Nossa equipe está disponível 24 horas por dia, 7 dias por semana, para atender suas necessidades de agenciamento marítimo com agilidade e profissionalismo.',
+    'contact.cta': 'Enviar Mensagem',
+    'contact.loc_label': 'Localização', 'contact.loc_val': 'Rio de Janeiro, Brasil', 'contact.web_label': 'Website',
+    'footer.about': 'Empresa', 'footer.services': 'Serviços', 'footer.areas': 'Áreas', 'footer.contact': 'Contato',
+    'footer.rights': '© 2024 SeaShore Solutions. Todos os direitos reservados.'
+  },
+  en: {
+    'meta.title': 'SeaShore Solutions – Maritime Agency',
+    'nav.about': 'Company', 'nav.services': 'Services', 'nav.areas': 'Areas', 'nav.contact': 'Contact',
+    'hero.eyebrow': 'Maritime Agency · Rio de Janeiro',
+    'hero.title': 'Solutions that sail<br>beyond the <em>horizon</em>',
+    'hero.desc': 'Since 2013 we have connected shipowners, terminals and operators with excellence in maritime agency — combining decades of experience with the agility of the new shipping.',
+    'hero.cta1': 'Our Services', 'hero.cta2': 'Get in Touch', 'hero.scroll': 'Scroll',
+    'stats.exp': 'Years of experience', 'stats.founded': 'Founded', 'stats.port': 'Port of Rio de Janeiro', 'stats.solutions': 'Integrated solutions',
+    'about.tag': 'The Company',
+    'about.title': 'Consolidated experience.<br>A renewed vision.',
+    'about.p1': 'Founded in 2013, SeaShore Solutions was born to offer the market a new concept of maritime agency — combining professionals with over 40 years of experience with the dynamism of a new generation in shipping.',
+    'about.p2': 'Today we are a hub of business and solutions for the local maritime market, integrating know-how, new technologies and industry trends.',
+    'about.mission_tag': 'Mission',
+    'about.mission': 'To optimize maritime agency by combining experience and innovation, seeking logistics solutions that speed up and add quality to port operations.',
+    'about.v1t': 'Respect', 'about.v1d': 'Clients, partners and staff',
+    'about.v2t': 'Training', 'about.v2d': 'Continuous training',
+    'about.v3t': 'Team', 'about.v3d': 'Collaborative work',
+    'about.v4t': 'Sustainability', 'about.v4d': 'Social and environmental responsibility',
+    'svc.title': 'Specialized services for the maritime market',
+    'svc.sub': 'Complete agency solutions with a skilled team and cutting-edge equipment.',
+    'svc.1t': 'General Agency', 'svc.1d': 'Full representation of shipowners at the ports of Rio de Janeiro, Itaguaí and the region, with 24h service.',
+    'svc.2t': 'Port Operations', 'svc.2d': 'Coordination of breakbulk cargo, dry bulk, steel products, grains and coal.',
+    'svc.3t': 'Bunkering', 'svc.3d': 'Full support in fuel supply operations at the Inner Roads and ports of the southeast region.',
+    'svc.4t': 'Diplomatic Agency', 'svc.4d': 'Specialized services for foreign-flagged vessels, yachts and ships on diplomatic missions.',
+    'svc.5t': 'Integrated Logistics', 'svc.5d': 'Customized solutions for port logistics, document management and specialized customs clearance.',
+    'svc.6t': '24/7 Support', 'svc.6d': 'Team available at any time to handle emergencies and urgent operational needs.',
+    'gallery.lbl': '— Operations',
+    'areas.title': 'Areas of operation',
+    'areas.sub': 'Strategic presence at the main terminals and routes of the southeast.',
+    'areas.1t': 'Port of Rio de Janeiro', 'areas.1d': 'Operations at the Commercial Quay, bulk and general cargo terminals, with access to all berths.',
+    'areas.2t': 'Port of Itaguaí', 'areas.2d': 'Service at the CSN, Ternium, TECON and Sepetiba terminals for heavy cargo and containers.',
+    'areas.3t': 'Marina da Glória', 'areas.3d': 'Support for yachts, leisure vessels and diplomatic ships in Guanabara Bay.',
+    'areas.4t': 'Inner Roads RJ', 'areas.4d': 'Bunkering and supply operations at anchorage in the inner waters of the Bay.',
+    'certs.lbl': 'Certifications &amp; Partnerships',
+    'contact.tag': 'Contact',
+    'contact.title': 'Shall we sail together to the next port?',
+    'contact.desc': 'Our team is available 24 hours a day, 7 days a week, to meet your maritime agency needs with agility and professionalism.',
+    'contact.cta': 'Send Message',
+    'contact.loc_label': 'Location', 'contact.loc_val': 'Rio de Janeiro, Brazil', 'contact.web_label': 'Website',
+    'footer.about': 'Company', 'footer.services': 'Services', 'footer.areas': 'Areas', 'footer.contact': 'Contact',
+    'footer.rights': '© 2024 SeaShore Solutions. All rights reserved.'
+  }
+};
+const HTML_LANG = { pt: 'pt-BR', en: 'en' };
+
+function applyLang(lang) {
+  if (!I18N[lang]) lang = 'pt';
+  const dict = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] != null) el.innerHTML = dict[key];
+  });
+  if (dict['meta.title']) document.title = dict['meta.title'];
+  document.documentElement.lang = HTML_LANG[lang] || lang;
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  try { localStorage.setItem('seashore_lang', lang); } catch (e) {}
+}
+
+(function initLang() {
+  let saved = null;
+  try { saved = localStorage.getItem('seashore_lang'); } catch (e) {}
+  const browser = (navigator.language || '').toLowerCase().startsWith('en') ? 'en' : 'pt';
+  applyLang(saved || browser);
+})();
+
+document.querySelectorAll('.lang-btn').forEach(b => {
+  b.addEventListener('click', () => applyLang(b.dataset.lang));
+});
+
+// ── Nav scroll class ──
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ── Hamburger / drawer ──
+const ham = document.getElementById('hamBtn');
+const drawer = document.getElementById('drawer');
+ham.addEventListener('click', () => {
+  ham.classList.toggle('open');
+  drawer.classList.toggle('open');
+  document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+});
+function closeDrawer() {
+  ham.classList.remove('open');
+  drawer.classList.remove('open');
+  document.body.style.overflow = '';
+}
+// close on outside tap
+drawer.addEventListener('click', e => { if (e.target === drawer) closeDrawer(); });
+
+// ── Scroll reveal ──
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// hero shows immediately
+document.getElementById('heroContent').classList.add('vis');
+</script>
+</body>
+</html>
