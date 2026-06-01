@@ -5,11 +5,15 @@ Reconstrução estática do site, em substituição ao WordPress atual (Hostinge
 
 ## Stack
 
-- HTML/CSS/JS puro, **página única** (`index.html`), sem build e sem dependências.
+- HTML/CSS/JS puro, sem build e sem dependências. Páginas: `index.html` (home)
+  e `privacidade.html` (política de privacidade / LGPD).
 - **Bilíngue PT/EN** via toggle no canto superior direito (botões `PT | EN`).
-  - Strings em um dicionário JS (`I18N` no fim do `index.html`), aplicadas por `data-i18n`.
-  - Idioma persiste em `localStorage` (`seashore_lang`); default segue o idioma do navegador (PT fora de EN).
-- Imagens locais em `assets/img/` (baixadas do WordPress atual; ver pendência de resolução).
+  - Strings em um dicionário JS (`I18N` no fim do `index.html`), aplicadas por `data-i18n`/`data-i18n-ph`.
+  - Idioma persiste em `localStorage` (`seashore_lang`), **compartilhado entre as páginas**; default segue o idioma do navegador (PT fora de EN).
+- Seções da home: hero, stats, empresa, serviços, galeria, áreas, **parceiros e clientes**, certificações, contato.
+- Imagens locais em `assets/img/` (baixadas do WP atual). Logos de parceiros em `assets/img/partners/`. Logo própria 3S em `assets/img/seashore-3s.png` (favicon temporário).
+- **SEO:** meta description, Open Graph/Twitter, canonical e JSON-LD (Organization).
+- **Acessibilidade:** skip link, foco visível, `aria-*` no menu mobile, form e botões de idioma.
 
 ## Como rodar localmente
 
@@ -43,14 +47,18 @@ campos ocultos `subject` / `from_name`.
 
 ## Pendências / a resolver antes do go-live
 
-- **Web3Forms:** inserir a access key real (passo acima) e confirmar o e-mail
-  de destino com o cliente.
-- **Tradução EN:** rascunho feito internamente — **revisar/validar com o cliente**.
-- **Página de privacidade:** o WordPress tinha `/privacidade/`. Não há link no rodapé
-  por enquanto; recriar como página/âncora estática se for necessária (LGPD).
-- **Imagens em baixa resolução:** as fotos são 600px de largura (originais do WP).
-  Para o hero full-bleed, pedir originais em alta ao cliente ou substituir por banco.
-- Conferir se há conteúdo no WP além desta home antes de desligar o plano.
+- **Web3Forms:** inserir a access key real (passo acima; destino previsto `operations@`)
+  e confirmar com o cliente.
+- **Política de privacidade é MINUTA** (`privacidade.html`) — **requer revisão jurídica /
+  do cliente** antes do go-live.
+- **Favicon definitivo:** hoje usa a logo 3S como temporário; trocar pela logo que o
+  cliente vai enviar.
+- **Tradução EN:** rascunho interno (home + privacidade) — **revisar/validar com o cliente**.
+- **Imagens em baixa resolução:** as fotos da home são 600px (originais do WP).
+  Para o hero full-bleed, pedir originais em alta ou substituir por banco.
+- **Montserrat:** o brasão de Montserrat aparecia na página de parceiros do WP; ficou
+  **fora** da seção (não é logo corporativa). Confirmar com o cliente se deve entrar.
+- Conferir se há conteúdo no WP além da home antes de desligar o plano.
 
 ## Contexto no vault
 
