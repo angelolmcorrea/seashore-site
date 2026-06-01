@@ -415,7 +415,8 @@ a { color: inherit; }
 .contact-form { margin: 2.5rem 0 0; max-width: 460px; }
 .contact-form .field { margin-bottom: 1rem; }
 .contact-form input,
-.contact-form textarea {
+.contact-form textarea,
+.contact-form select {
   width: 100%; background: rgba(255,255,255,.04);
   border: 1px solid rgba(168,205,216,.25);
   color: var(--white); font-family: var(--sans); font-size: .9rem;
@@ -424,7 +425,10 @@ a { color: inherit; }
 .contact-form input::placeholder,
 .contact-form textarea::placeholder { color: var(--gray); }
 .contact-form input:focus,
-.contact-form textarea:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,.06); }
+.contact-form textarea:focus,
+.contact-form select:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,.06); }
+.contact-form select { appearance: none; cursor: pointer; }
+.contact-form select option { background: var(--deep); color: var(--white); }
 .contact-form textarea { resize: vertical; min-height: 120px; }
 .contact-form button { margin-top: .3rem; border: none; cursor: pointer; }
 .contact-form button:disabled { opacity: .55; cursor: default; transform: none; }
@@ -432,6 +436,20 @@ a { color: inherit; }
 .form-status { margin-top: 1rem; font-size: .82rem; line-height: 1.5; min-height: 1.2em; }
 .form-status.ok  { color: var(--accent-lt); }
 .form-status.err { color: #e2776a; }
+
+/* Contact info blocks */
+.contact-blocks { display: flex; flex-wrap: wrap; gap: 2.5rem 3.5rem; margin-top: 3.5rem; }
+.cblock label {
+  display: block; font-size: .62rem; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: .8rem;
+}
+.cblock ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+.cblock li { font-size: .86rem; color: var(--sky); line-height: 1.45; }
+.cblock li strong { display: block; color: var(--white); font-weight: 500; margin-bottom: .15rem; }
+.cblock a { color: var(--white); text-decoration: none; transition: color .3s; }
+.cblock a:hover { color: var(--accent-lt); }
+.cblock .sep { color: var(--gray); margin: 0 .35rem; }
+.cblock span { font-size: .86rem; color: var(--white); }
 
 /* ═══════════════════════════════════════
    FOOTER
@@ -797,6 +815,14 @@ footer small { font-size: .68rem; color: var(--gray); }
       <!-- honeypot anti-spam (fica oculto) -->
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="field">
+        <select name="department" id="cf-dept" required>
+          <option value="" disabled selected data-i18n="contact.dept_label">Selecione o assunto / departamento</option>
+          <option value="Operacional e Documentação" data-i18n="contact.dept_ops">Operacional e Documentação</option>
+          <option value="Financeiro" data-i18n="contact.dept_fin">Financeiro</option>
+          <option value="LGPD e Privacidade" data-i18n="contact.dept_lgpd">LGPD e Privacidade</option>
+        </select>
+      </div>
+      <div class="field">
         <input type="text" name="name" id="cf-name" required data-i18n-ph="contact.form_name" placeholder="Nome">
       </div>
       <div class="field">
@@ -808,14 +834,31 @@ footer small { font-size: .68rem; color: var(--gray); }
       <button type="submit" class="btn-p" id="cf-submit" data-i18n="contact.cta">Enviar Mensagem</button>
       <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
     </form>
-    <div class="contact-dets">
-      <div class="cdet">
+    <div class="contact-blocks">
+      <div class="cblock">
+        <label data-i18n="contact.depts_title">Departamentos</label>
+        <ul>
+          <li><strong data-i18n="contact.dept_ops">Operacional e Documentação</strong><a href="mailto:operations@seashoresolutions.com.br">operations@seashoresolutions.com.br</a></li>
+          <li><strong data-i18n="contact.dept_fin">Financeiro</strong><a href="mailto:financial@seashoresolutions.com.br">financial@seashoresolutions.com.br</a></li>
+          <li><strong data-i18n="contact.dept_lgpd">LGPD e Privacidade</strong><a href="mailto:lgpd@seashoresolutions.com.br">lgpd@seashoresolutions.com.br</a></li>
+        </ul>
+      </div>
+      <div class="cblock">
+        <label data-i18n="contact.team_title">Atendimento</label>
+        <ul>
+          <li>
+            <strong>Thiago Tomaz Botelho</strong>
+            <a href="tel:+5521996087802">(21) 99608-7802</a><span class="sep">·</span><a href="mailto:thiagobotelho@seashoresolutions.com.br">thiagobotelho@seashoresolutions.com.br</a>
+          </li>
+          <li>
+            <strong>Mário Botelho</strong>
+            <a href="tel:+5521996082054">(21) 99608-2054</a><span class="sep">·</span><a href="mailto:mariobotelho@seashoresolutions.com.br">mariobotelho@seashoresolutions.com.br</a>
+          </li>
+        </ul>
+      </div>
+      <div class="cblock">
         <label data-i18n="contact.loc_label">Localização</label>
         <span data-i18n="contact.loc_val">Rio de Janeiro, Brasil</span>
-      </div>
-      <div class="cdet">
-        <label data-i18n="contact.web_label">Website</label>
-        <a href="https://seashoresolutions.com.br">seashoresolutions.com.br</a>
       </div>
     </div>
   </div>
@@ -877,6 +920,9 @@ const I18N = {
     'contact.desc': 'Nossa equipe está disponível 24 horas por dia, 7 dias por semana, para atender suas necessidades de agenciamento marítimo com agilidade e profissionalismo.',
     'contact.cta': 'Enviar Mensagem',
     'contact.form_name': 'Nome', 'contact.form_email': 'E-mail', 'contact.form_msg': 'Mensagem',
+    'contact.dept_label': 'Selecione o assunto / departamento',
+    'contact.dept_ops': 'Operacional e Documentação', 'contact.dept_fin': 'Financeiro', 'contact.dept_lgpd': 'LGPD e Privacidade',
+    'contact.depts_title': 'Departamentos', 'contact.team_title': 'Atendimento',
     'contact.sending': 'Enviando...',
     'contact.success': 'Mensagem enviada! Retornaremos em breve.',
     'contact.error': 'Não foi possível enviar agora. Tente novamente em instantes.',
@@ -923,6 +969,9 @@ const I18N = {
     'contact.desc': 'Our team is available 24 hours a day, 7 days a week, to meet your maritime agency needs with agility and professionalism.',
     'contact.cta': 'Send Message',
     'contact.form_name': 'Name', 'contact.form_email': 'Email', 'contact.form_msg': 'Message',
+    'contact.dept_label': 'Select a subject / department',
+    'contact.dept_ops': 'Operations & Documentation', 'contact.dept_fin': 'Finance', 'contact.dept_lgpd': 'Data Privacy (LGPD)',
+    'contact.depts_title': 'Departments', 'contact.team_title': 'Get in touch',
     'contact.sending': 'Sending...',
     'contact.success': "Message sent! We'll get back to you soon.",
     'contact.error': 'Could not send right now. Please try again in a moment.',
