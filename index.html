@@ -469,8 +469,56 @@ a { color: inherit; }
 }
 .certs-lbl { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gray); white-space: nowrap; }
 .certs-logos { display: flex; gap: 3rem; align-items: center; flex-wrap: wrap; }
-.certs-logos img { height: 64px; opacity: .55; filter: grayscale(1); transition: all .3s; }
+.certs-logos img { height: 84px; opacity: .55; filter: grayscale(1); transition: all .3s; }
 .certs-logos img:hover { opacity: 1; filter: none; }
+
+/* Certificado em destaque */
+.cert-feature { display: flex; align-items: center; gap: 1.3rem; }
+.cert-thumb {
+  flex-shrink: 0; padding: 0; border: none; cursor: pointer; background: #fff;
+  border-radius: 6px; overflow: hidden; line-height: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,.3); transition: transform .3s, box-shadow .3s;
+}
+.cert-thumb img { width: 150px; height: auto; display: block; }
+.cert-thumb:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,.45); }
+.cert-info { display: flex; flex-direction: column; gap: .35rem; max-width: 270px; }
+.cert-info strong { font-family: var(--serif); font-weight: 500; font-size: 1.05rem; color: var(--white); }
+.cert-info p { font-size: .76rem; color: var(--gray); line-height: 1.6; }
+.cert-link {
+  align-self: flex-start; margin-top: .2rem; background: none; border: none; cursor: pointer;
+  color: var(--accent-lt); font-family: var(--sans); font-size: .76rem; letter-spacing: .04em; padding: 0;
+  transition: color .25s;
+}
+.cert-link:hover { color: var(--accent); }
+
+/* Lightbox do certificado */
+.cert-lightbox {
+  position: fixed; inset: 0; z-index: 400;
+  background: rgba(5,12,24,.55); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center; padding: var(--r-nav);
+}
+.cert-lightbox[hidden] { display: none; }
+.cert-lightbox-inner { position: relative; display: inline-block; line-height: 0; }
+.cert-lightbox img {
+  max-width: min(550px, 92vw); max-height: 82vh; width: auto; height: auto;
+  border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+.cert-close {
+  position: absolute; top: -.7rem; right: -.7rem;
+  width: 2rem; height: 2rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--navy); color: var(--white); border: 1px solid rgba(255,255,255,.3);
+  font-size: 1.3rem; line-height: 1; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,.45); transition: background .25s, color .25s;
+}
+.cert-close:hover { background: var(--accent); color: var(--navy); }
+.cert-lightbox:not([hidden]) { animation: certFade .55s ease both; }
+.cert-lightbox:not([hidden]) .cert-lightbox-inner { animation: certRise .55s ease both; }
+@keyframes certFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes certRise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .cert-lightbox:not([hidden]), .cert-lightbox:not([hidden]) .cert-lightbox-inner { animation: none; }
+}
 
 /* ═══════════════════════════════════════
    CONTACT
@@ -650,6 +698,12 @@ footer small { font-size: .68rem; color: var(--gray); }
 
   .hero h1 { font-size: clamp(2rem, 9vw, 2.8rem); }
   .hero-desc { font-size: .87rem; }
+}
+
+@media (max-width: 520px) {
+  .cert-feature { flex-direction: column; align-items: flex-start; }
+  .cert-thumb img { width: 220px; }
+  .cert-info { max-width: 100%; }
 }
 
 /* Very small phones */
@@ -976,9 +1030,29 @@ footer small { font-size: .68rem; color: var(--gray); }
 <!-- ── CERTS ── -->
 <div class="certs fade-up">
   <span class="certs-lbl" data-i18n="certs.lbl">Certificações &amp; Parcerias</span>
+
+  <div class="cert-feature">
+    <button type="button" class="cert-thumb" id="certBtn" aria-label="Ver certificado FENAMAR">
+      <img src="assets/img/certificado-fenamar.jpg" alt="Certificado Selo de Qualidade FENAMAR — Seashore Solutions" loading="lazy">
+    </button>
+    <div class="cert-info">
+      <strong data-i18n="cert.title">Selo de Qualidade FENAMAR</strong>
+      <p data-i18n="cert.desc">Certificada desde 2022 · válida até 05/2028. Concedido pela FENAMAR com recomendação da SINDARIO.</p>
+      <button type="button" class="cert-link" id="certLink" data-i18n="cert.view">Ver certificado &#9656;</button>
+    </div>
+  </div>
+
   <div class="certs-logos">
-    <img src="assets/img/Selo-Fenamar.png" alt="Fenamar" loading="lazy">
+    <img src="assets/img/selo-sindario.png" alt="Sindario" loading="lazy">
     <img src="assets/img/Selo-Quality.png" alt="Quality" loading="lazy">
+  </div>
+</div>
+
+<!-- Lightbox do certificado -->
+<div class="cert-lightbox" id="certLightbox" hidden>
+  <div class="cert-lightbox-inner">
+    <button type="button" class="cert-close" id="certClose" aria-label="Fechar">&times;</button>
+    <img src="assets/img/certificado-fenamar.jpg" alt="Certificado Selo de Qualidade FENAMAR — Seashore Solutions">
   </div>
 </div>
 
@@ -1125,6 +1199,9 @@ const I18N = {
     'areas.9t': 'Inner Roads RJ', 'areas.9d': 'Operações de bunkering e suprimentos em ancoragem nas águas internas da Baía.',
     'areas.9c': '<span>Bunkering</span><span>Suprimentos</span><span>Ancoragem</span>',
     'certs.lbl': 'Certificações &amp; Parcerias',
+    'cert.title': 'Selo de Qualidade FENAMAR',
+    'cert.desc': 'Certificada desde 2022 · válida até 05/2028. Concedido pela FENAMAR com recomendação da SINDARIO.',
+    'cert.view': 'Ver certificado &#9656;',
     'contact.tag': 'Contato',
     'contact.title': 'Vamos navegar juntos rumo ao próximo porto?',
     'contact.desc': 'Nossa equipe está disponível 24 horas por dia, 7 dias por semana, para atender suas necessidades de agenciamento marítimo com agilidade e profissionalismo.',
@@ -1202,6 +1279,9 @@ const I18N = {
     'areas.9t': 'Inner Roads RJ', 'areas.9d': 'Bunkering and supply operations at anchorage in the inner waters of the Bay.',
     'areas.9c': '<span>Bunkering</span><span>Supplies</span><span>Anchorage</span>',
     'certs.lbl': 'Certifications &amp; Partnerships',
+    'cert.title': 'FENAMAR Quality Seal',
+    'cert.desc': 'Certified since 2022 · valid until 05/2028. Granted by FENAMAR with SINDARIO\'s recommendation.',
+    'cert.view': 'View certificate &#9656;',
     'contact.tag': 'Contact',
     'contact.title': 'Shall we sail together to the next port?',
     'contact.desc': 'Our team is available 24 hours a day, 7 days a week, to meet your maritime agency needs with agility and professionalism.',
@@ -1317,6 +1397,30 @@ if (contactForm) {
       submitBtn.disabled = false;
     }
   });
+}
+
+// ── Certificate lightbox ──
+const certLb = document.getElementById('certLightbox');
+if (certLb) {
+  const certCloseBtn = document.getElementById('certClose');
+  const openCert = () => { certLb.hidden = false; document.body.style.overflow = 'hidden'; certCloseBtn.focus(); };
+  const closeCert = () => { certLb.hidden = true; document.body.style.overflow = ''; };
+  ['certBtn', 'certLink'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', openCert);
+  });
+  certCloseBtn.addEventListener('click', closeCert);
+  certLb.addEventListener('click', e => { if (e.target === certLb) closeCert(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !certLb.hidden) closeCert(); });
+
+  // Auto-abre o certificado uma vez por sessão (janela de boas-vindas).
+  // Não reabre ao recarregar/navegar na mesma sessão do navegador.
+  let certSeen = false;
+  try { certSeen = sessionStorage.getItem('seashore_cert_seen') === '1'; } catch (e) {}
+  if (!certSeen) {
+    setTimeout(openCert, 350);
+    try { sessionStorage.setItem('seashore_cert_seen', '1'); } catch (e) {}
+  }
 }
 
 // ── Scroll reveal ──
