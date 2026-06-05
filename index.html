@@ -351,6 +351,21 @@ a { color: inherit; }
   font-weight: 300; color: rgba(196,154,60,.08); line-height: 1;
   user-select: none;
 }
+.svc-orgaos {
+  margin-top: clamp(2rem, 3.5vw, 3.5rem);
+  display: flex; flex-direction: column; align-items: center;
+  gap: 1.1rem; text-align: center;
+}
+.svc-orgaos-lbl {
+  font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent);
+}
+.svc-orgaos-list {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; max-width: 780px;
+}
+.svc-orgaos-list span {
+  font-size: .72rem; color: var(--sky); line-height: 1;
+  border: 1px solid rgba(255,255,255,.12); border-radius: 100px; padding: .34rem .8rem;
+}
 
 /* ═══════════════════════════════════════
    GALLERY
@@ -392,13 +407,14 @@ a { color: inherit; }
   background: var(--deep);
 }
 .areas-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 1.2rem; margin-top: clamp(2.5rem, 4vw, 4rem);
 }
 .area-card {
   border: 1px solid rgba(255,255,255,.08);
   padding: clamp(1.5rem, 2.5vw, 2.5rem) clamp(1.2rem, 2vw, 2rem);
   transition: border-color .3s, transform .3s;
+  display: flex; flex-direction: column;
 }
 .area-card:hover { border-color: var(--accent); transform: translateY(-4px); }
 .area-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-bottom: 1.3rem; }
@@ -407,6 +423,17 @@ a { color: inherit; }
   font-weight: 400; margin-bottom: .7rem;
 }
 .area-card p { font-size: clamp(.75rem, 1vw, .83rem); color: var(--gray); line-height: 1.65; }
+.area-meta-lbl {
+  display: block; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent); margin: 1.2rem 0 .45rem;
+}
+.area-card .area-terminals { color: var(--sky); }
+.cargo-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.cargo-tags span {
+  font-size: .66rem; letter-spacing: .02em; color: var(--accent-lt);
+  border: 1px solid rgba(196,154,60,.35); border-radius: 100px;
+  padding: .28rem .65rem; line-height: 1;
+}
 
 /* ═══════════════════════════════════════
    PARTNERS & CLIENTS
@@ -513,7 +540,8 @@ a { color: inherit; }
 .cblock a { color: var(--white); text-decoration: none; transition: color .3s; }
 .cblock a:hover { color: var(--accent-lt); }
 .cblock .sep { color: var(--gray); margin: 0 .35rem; }
-.cblock span { font-size: .86rem; color: var(--white); }
+.cblock span { font-size: .86rem; color: var(--white); line-height: 1.5; }
+.contact-linkedin { display: inline-block; margin-top: .7rem; font-size: .86rem; }
 
 /* ═══════════════════════════════════════
    FOOTER
@@ -737,7 +765,7 @@ footer small { font-size: .68rem; color: var(--gray); }
         <line x1="6" y1="40" x2="42" y2="40"/>
       </svg>
       <h3 data-i18n="svc.1t">Agenciamento Geral</h3>
-      <p data-i18n="svc.1d">Representação completa de armadores nos portos do Rio de Janeiro, Itaguaí e região, com atendimento 24h.</p>
+      <p data-i18n="svc.1d">Representação de armadores como full, charterer's, protecting e husbandry agents nos portos do Rio de Janeiro, Itaguaí e região, com atendimento 24h.</p>
     </div>
 
     <div class="svc-card fade-up d1">
@@ -749,7 +777,7 @@ footer small { font-size: .68rem; color: var(--gray); }
         <circle cx="16" cy="36" r="3"/><circle cx="32" cy="36" r="3"/>
       </svg>
       <h3 data-i18n="svc.2t">Operações Portuárias</h3>
-      <p data-i18n="svc.2d">Coordenação de cargas breakbulk, granéis sólidos, produtos siderúrgicos, grãos e carvão.</p>
+      <p data-i18n="svc.2d">Coordenação de cargas breakbulk, granéis sólidos, produtos siderúrgicos, grãos e carvão, com planejamento das operações junto aos envolvidos e prestação de contas.</p>
     </div>
 
     <div class="svc-card fade-up d2">
@@ -784,7 +812,7 @@ footer small { font-size: .68rem; color: var(--gray); }
         <path d="M20 4 L28 4"/>
       </svg>
       <h3 data-i18n="svc.5t">Logística Integrada</h3>
-      <p data-i18n="svc.5d">Soluções customizadas de logística portuária, gestão documental e despacho aduaneiro especializado.</p>
+      <p data-i18n="svc.5d">Soluções customizadas de logística portuária, gestão documental e despacho aduaneiro, incluindo viabilidade e gestão de projetos de cargas e terminais.</p>
     </div>
 
     <div class="svc-card fade-up d2">
@@ -799,6 +827,11 @@ footer small { font-size: .68rem; color: var(--gray); }
       <p data-i18n="svc.6d">Equipe disponível a qualquer hora para atender emergências e necessidades operacionais urgentes.</p>
     </div>
 
+  </div>
+
+  <div class="svc-orgaos fade-up">
+    <span class="svc-orgaos-lbl" data-i18n="svc.org_lbl">Liberações e despachos junto aos órgãos</span>
+    <div class="svc-orgaos-list" data-i18n="svc.org_list"><span>ANVISA</span><span>Polícia Federal</span><span>MAPA</span><span>Receita Federal</span><span>ANTAQ</span><span>Capitania dos Portos</span><span>OGMO</span><span>Tribunal Marítimo</span></div>
   </div>
 </section>
 
@@ -839,22 +872,79 @@ footer small { font-size: .68rem; color: var(--gray); }
     <div class="area-card fade-up">
       <div class="area-dot"></div>
       <h4 data-i18n="areas.1t">Porto do Rio de Janeiro</h4>
-      <p data-i18n="areas.1d">Operações no Cais Comercial, terminais de granéis e carga geral, com acesso a todos os berços.</p>
+      <p data-i18n="areas.1d">31 berços, 6,7 km de cais e 1 milhão de m² de área operacional. Suprimento de combustível em ancoragem e atracado.</p>
+      <span class="area-meta-lbl" data-i18n="areas.term_lbl">Terminais</span>
+      <p class="area-terminals" data-i18n="areas.1term">Cais Comercial e terminais de granéis</p>
+      <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
+      <div class="cargo-tags" data-i18n="areas.1c"><span>Trigo</span><span>Siderúrgicos</span><span>Breu</span><span>Ferro-gusa</span><span>Fertilizantes</span><span>Contêineres</span><span>Project cargo</span></div>
     </div>
     <div class="area-card fade-up d1">
       <div class="area-dot"></div>
       <h4 data-i18n="areas.2t">Porto de Itaguaí</h4>
-      <p data-i18n="areas.2d">Atendimento nos terminais CSN, Ternium, TECON e Sepetiba para cargas pesadas e contêineres.</p>
+      <p data-i18n="areas.2d">Terminais modernos voltados à importação de carvão e à exportação de minério de ferro do interior, com movimentação de contêineres e granéis.</p>
+      <span class="area-meta-lbl" data-i18n="areas.term_lbl">Terminais</span>
+      <p class="area-terminals" data-i18n="areas.2term">Sepetiba Tecon · CPBS · CSN</p>
+      <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
+      <div class="cargo-tags" data-i18n="areas.2c"><span>Carvão</span><span>Minério de ferro</span><span>Contêineres</span><span>Carga geral</span><span>Granéis</span></div>
     </div>
     <div class="area-card fade-up d2">
       <div class="area-dot"></div>
-      <h4 data-i18n="areas.3t">Marina da Glória</h4>
-      <p data-i18n="areas.3d">Suporte a iates, embarcações de recreio e navios diplomáticos na Baía de Guanabara.</p>
+      <h4 data-i18n="areas.3t">Baía de Sepetiba</h4>
+      <p data-i18n="areas.3d">Terminais fora do complexo do porto de Itaguaí, dentro da baía, com forte movimentação de importação e exportação de minerais e siderúrgicos.</p>
+      <span class="area-meta-lbl" data-i18n="areas.term_lbl">Terminais</span>
+      <p class="area-terminals" data-i18n="areas.3term">Ternium Brasil · Porto Sudeste</p>
+      <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
+      <div class="cargo-tags" data-i18n="areas.3c"><span>Carvão</span><span>Minério de ferro</span><span>Calcário</span><span>Placas de aço</span><span>Granéis</span></div>
     </div>
-    <div class="area-card fade-up d3">
+    <div class="area-card fade-up">
       <div class="area-dot"></div>
-      <h4 data-i18n="areas.4t">Inner Roads RJ</h4>
-      <p data-i18n="areas.4d">Operações de bunkering e suprimentos em ancoragem nas águas internas da Baía.</p>
+      <h4 data-i18n="areas.4t">Baía de Ilha Grande</h4>
+      <p data-i18n="areas.4d">Terminal da Ilha Guaíba (TIG), da Vale S/A, em Mangaratiba, a cerca de 130 km do Rio. Dois berços equipados com ship loaders.</p>
+      <span class="area-meta-lbl" data-i18n="areas.term_lbl">Terminais</span>
+      <p class="area-terminals" data-i18n="areas.4term">TIG — Ilha Guaíba (Vale S/A)</p>
+      <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
+      <div class="cargo-tags" data-i18n="areas.4c"><span>Minério de ferro</span></div>
+    </div>
+    <div class="area-card fade-up d1">
+      <div class="area-dot"></div>
+      <h4 data-i18n="areas.5t">Porto do Açu</h4>
+      <p data-i18n="areas.5d">Complexo portuário de 130 km² com 9 terminais offshore e onshore, sob administração da Prumo Logística.</p>
+      <span class="area-meta-lbl" data-i18n="areas.term_lbl">Terminais</span>
+      <p class="area-terminals" data-i18n="areas.5term">9 terminais (Prumo Logística)</p>
+      <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
+      <div class="cargo-tags" data-i18n="areas.5c"><span>Minério de ferro</span><span>Gás</span><span>Petróleo</span><span>Fertilizantes</span><span>Carvão</span><span>Coque</span><span>Bauxita</span><span>Project cargo</span></div>
+    </div>
+    <div class="area-card fade-up d2">
+      <div class="area-dot"></div>
+      <h4 data-i18n="areas.6t">Porto do Forno</h4>
+      <p data-i18n="areas.6d">Porto em Arraial do Cabo operado pela TPAR (grupo Splenda Offshore), com vocação para apoio às operações offshore.</p>
+      <span class="area-meta-lbl" data-i18n="areas.term_lbl">Terminais</span>
+      <p class="area-terminals" data-i18n="areas.6term">Operado pela TPAR</p>
+      <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
+      <div class="cargo-tags" data-i18n="areas.6c"><span>Apoio offshore</span></div>
+    </div>
+    <div class="area-card fade-up">
+      <div class="area-dot"></div>
+      <h4 data-i18n="areas.7t">Angra dos Reis</h4>
+      <p data-i18n="areas.7d">Operação controlada pela TPAR, com infraestrutura para apoio offshore, pátio alfandegado e armazenagem de cargas.</p>
+      <span class="area-meta-lbl" data-i18n="areas.term_lbl">Terminais</span>
+      <p class="area-terminals" data-i18n="areas.7term">Operado pela TPAR</p>
+      <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
+      <div class="cargo-tags" data-i18n="areas.7c"><span>Apoio offshore</span><span>Pátio alfandegado</span><span>Armazenagem</span></div>
+    </div>
+    <div class="area-card fade-up d1">
+      <div class="area-dot"></div>
+      <h4 data-i18n="areas.8t">Marina da Glória</h4>
+      <p data-i18n="areas.8d">Suporte a iates, embarcações de recreio e navios diplomáticos na Baía de Guanabara.</p>
+      <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
+      <div class="cargo-tags" data-i18n="areas.8c"><span>Iates</span><span>Recreio</span><span>Navios diplomáticos</span></div>
+    </div>
+    <div class="area-card fade-up d2">
+      <div class="area-dot"></div>
+      <h4 data-i18n="areas.9t">Inner Roads RJ</h4>
+      <p data-i18n="areas.9d">Operações de bunkering e suprimentos em ancoragem nas águas internas da Baía.</p>
+      <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
+      <div class="cargo-tags" data-i18n="areas.9c"><span>Bunkering</span><span>Suprimentos</span><span>Ancoragem</span></div>
     </div>
   </div>
 </section>
@@ -947,7 +1037,8 @@ footer small { font-size: .68rem; color: var(--gray); }
       </div>
       <div class="cblock">
         <label data-i18n="contact.loc_label">Localização</label>
-        <span data-i18n="contact.loc_val">Rio de Janeiro, Brasil</span>
+        <span data-i18n="contact.loc_val">Av. das Américas, 16225 — Sala 303<br>Recreio dos Bandeirantes — Rio de Janeiro / RJ<br>CEP 22790-701</span>
+        <a class="contact-linkedin" href="https://www.linkedin.com/company/seashore-solutions/" target="_blank" rel="noopener" data-i18n="contact.linkedin">LinkedIn</a>
       </div>
     </div>
   </div>
@@ -994,19 +1085,43 @@ const I18N = {
     'about.v4t': 'Sustentabilidade', 'about.v4d': 'Responsabilidade socioambiental',
     'svc.title': 'Serviços especializados para o mercado marítimo',
     'svc.sub': 'Soluções completas de agenciamento com equipe capacitada e equipamentos de ponta.',
-    'svc.1t': 'Agenciamento Geral', 'svc.1d': 'Representação completa de armadores nos portos do Rio de Janeiro, Itaguaí e região, com atendimento 24h.',
-    'svc.2t': 'Operações Portuárias', 'svc.2d': 'Coordenação de cargas breakbulk, granéis sólidos, produtos siderúrgicos, grãos e carvão.',
+    'svc.1t': 'Agenciamento Geral', 'svc.1d': 'Representação de armadores como full, charterer\'s, protecting e husbandry agents nos portos do Rio de Janeiro, Itaguaí e região, com atendimento 24h.',
+    'svc.2t': 'Operações Portuárias', 'svc.2d': 'Coordenação de cargas breakbulk, granéis sólidos, produtos siderúrgicos, grãos e carvão, com planejamento das operações junto aos envolvidos e prestação de contas.',
     'svc.3t': 'Bunkering', 'svc.3d': 'Suporte completo em operações de abastecimento de combustível nas Inner Roads e portos da região sudeste.',
     'svc.4t': 'Agências Diplomáticas', 'svc.4d': 'Serviços especializados para embarcações de bandeira estrangeira, iates e navios em missão diplomática.',
-    'svc.5t': 'Logística Integrada', 'svc.5d': 'Soluções customizadas de logística portuária, gestão documental e despacho aduaneiro especializado.',
+    'svc.5t': 'Logística Integrada', 'svc.5d': 'Soluções customizadas de logística portuária, gestão documental e despacho aduaneiro, incluindo viabilidade e gestão de projetos de cargas e terminais.',
     'svc.6t': 'Suporte 24/7', 'svc.6d': 'Equipe disponível a qualquer hora para atender emergências e necessidades operacionais urgentes.',
+    'svc.org_lbl': 'Liberações e despachos junto aos órgãos',
+    'svc.org_list': '<span>ANVISA</span><span>Polícia Federal</span><span>MAPA</span><span>Receita Federal</span><span>ANTAQ</span><span>Capitania dos Portos</span><span>OGMO</span><span>Tribunal Marítimo</span>',
     'gallery.lbl': '— Operações',
     'areas.title': 'Áreas de atuação',
-    'areas.sub': 'Presença estratégica nos principais terminais e rotas do sudeste.',
-    'areas.1t': 'Porto do Rio de Janeiro', 'areas.1d': 'Operações no Cais Comercial, terminais de granéis e carga geral, com acesso a todos os berços.',
-    'areas.2t': 'Porto de Itaguaí', 'areas.2d': 'Atendimento nos terminais CSN, Ternium, TECON e Sepetiba para cargas pesadas e contêineres.',
-    'areas.3t': 'Marina da Glória', 'areas.3d': 'Suporte a iates, embarcações de recreio e navios diplomáticos na Baía de Guanabara.',
-    'areas.4t': 'Inner Roads RJ', 'areas.4d': 'Operações de bunkering e suprimentos em ancoragem nas águas internas da Baía.',
+    'areas.sub': 'Presença estratégica nos principais portos e terminais do sudeste.',
+    'areas.term_lbl': 'Terminais', 'areas.cargo_lbl': 'Principais cargas',
+    'areas.1t': 'Porto do Rio de Janeiro', 'areas.1d': '31 berços, 6,7 km de cais e 1 milhão de m² de área operacional. Suprimento de combustível em ancoragem e atracado.',
+    'areas.1term': 'Cais Comercial e terminais de granéis',
+    'areas.1c': '<span>Trigo</span><span>Siderúrgicos</span><span>Breu</span><span>Ferro-gusa</span><span>Fertilizantes</span><span>Contêineres</span><span>Project cargo</span>',
+    'areas.2t': 'Porto de Itaguaí', 'areas.2d': 'Terminais modernos voltados à importação de carvão e à exportação de minério de ferro do interior, com movimentação de contêineres e granéis.',
+    'areas.2term': 'Sepetiba Tecon · CPBS · CSN',
+    'areas.2c': '<span>Carvão</span><span>Minério de ferro</span><span>Contêineres</span><span>Carga geral</span><span>Granéis</span>',
+    'areas.3t': 'Baía de Sepetiba', 'areas.3d': 'Terminais fora do complexo do porto de Itaguaí, dentro da baía, com forte movimentação de importação e exportação de minerais e siderúrgicos.',
+    'areas.3term': 'Ternium Brasil · Porto Sudeste',
+    'areas.3c': '<span>Carvão</span><span>Minério de ferro</span><span>Calcário</span><span>Placas de aço</span><span>Granéis</span>',
+    'areas.4t': 'Baía de Ilha Grande', 'areas.4d': 'Terminal da Ilha Guaíba (TIG), da Vale S/A, em Mangaratiba, a cerca de 130 km do Rio. Dois berços equipados com ship loaders.',
+    'areas.4term': 'TIG — Ilha Guaíba (Vale S/A)',
+    'areas.4c': '<span>Minério de ferro</span>',
+    'areas.5t': 'Porto do Açu', 'areas.5d': 'Complexo portuário de 130 km² com 9 terminais offshore e onshore, sob administração da Prumo Logística.',
+    'areas.5term': '9 terminais (Prumo Logística)',
+    'areas.5c': '<span>Minério de ferro</span><span>Gás</span><span>Petróleo</span><span>Fertilizantes</span><span>Carvão</span><span>Coque</span><span>Bauxita</span><span>Project cargo</span>',
+    'areas.6t': 'Porto do Forno', 'areas.6d': 'Porto em Arraial do Cabo operado pela TPAR (grupo Splenda Offshore), com vocação para apoio às operações offshore.',
+    'areas.6term': 'Operado pela TPAR',
+    'areas.6c': '<span>Apoio offshore</span>',
+    'areas.7t': 'Angra dos Reis', 'areas.7d': 'Operação controlada pela TPAR, com infraestrutura para apoio offshore, pátio alfandegado e armazenagem de cargas.',
+    'areas.7term': 'Operado pela TPAR',
+    'areas.7c': '<span>Apoio offshore</span><span>Pátio alfandegado</span><span>Armazenagem</span>',
+    'areas.8t': 'Marina da Glória', 'areas.8d': 'Suporte a iates, embarcações de recreio e navios diplomáticos na Baía de Guanabara.',
+    'areas.8c': '<span>Iates</span><span>Recreio</span><span>Navios diplomáticos</span>',
+    'areas.9t': 'Inner Roads RJ', 'areas.9d': 'Operações de bunkering e suprimentos em ancoragem nas águas internas da Baía.',
+    'areas.9c': '<span>Bunkering</span><span>Suprimentos</span><span>Ancoragem</span>',
     'certs.lbl': 'Certificações &amp; Parcerias',
     'contact.tag': 'Contato',
     'contact.title': 'Vamos navegar juntos rumo ao próximo porto?',
@@ -1019,7 +1134,7 @@ const I18N = {
     'contact.sending': 'Enviando...',
     'contact.success': 'Mensagem enviada! Retornaremos em breve.',
     'contact.error': 'Não foi possível enviar agora. Tente novamente em instantes.',
-    'contact.loc_label': 'Localização', 'contact.loc_val': 'Rio de Janeiro, Brasil', 'contact.web_label': 'Website',
+    'contact.loc_label': 'Localização', 'contact.loc_val': 'Av. das Américas, 16225 — Sala 303<br>Recreio dos Bandeirantes — Rio de Janeiro / RJ<br>CEP 22790-701', 'contact.linkedin': 'LinkedIn', 'contact.web_label': 'Website',
     'footer.about': 'Empresa', 'footer.services': 'Serviços', 'footer.areas': 'Áreas', 'footer.contact': 'Contato',
     'footer.privacy': 'Privacidade',
     'footer.rights': '© 2024 SeaShore Solutions. Todos os direitos reservados.'
@@ -1047,19 +1162,43 @@ const I18N = {
     'about.v4t': 'Sustainability', 'about.v4d': 'Social and environmental responsibility',
     'svc.title': 'Specialized services for the maritime market',
     'svc.sub': 'Complete agency solutions with a skilled team and cutting-edge equipment.',
-    'svc.1t': 'General Agency', 'svc.1d': 'Full representation of shipowners at the ports of Rio de Janeiro, Itaguaí and the region, with 24h service.',
-    'svc.2t': 'Port Operations', 'svc.2d': 'Coordination of breakbulk cargo, dry bulk, steel products, grains and coal.',
+    'svc.1t': 'General Agency', 'svc.1d': 'Representation of shipowners as full, charterer\'s, protecting and husbandry agents at the ports of Rio de Janeiro, Itaguaí and the region, with 24h service.',
+    'svc.2t': 'Port Operations', 'svc.2d': 'Coordination of breakbulk cargo, dry bulk, steel products, grains and coal, with operations planning alongside stakeholders and expense accounting.',
     'svc.3t': 'Bunkering', 'svc.3d': 'Full support in fuel supply operations at the Inner Roads and ports of the southeast region.',
     'svc.4t': 'Diplomatic Agency', 'svc.4d': 'Specialized services for foreign-flagged vessels, yachts and ships on diplomatic missions.',
-    'svc.5t': 'Integrated Logistics', 'svc.5d': 'Customized solutions for port logistics, document management and specialized customs clearance.',
+    'svc.5t': 'Integrated Logistics', 'svc.5d': 'Customized solutions for port logistics, document management and customs clearance, including feasibility and management of cargo and terminal projects.',
     'svc.6t': '24/7 Support', 'svc.6d': 'Team available at any time to handle emergencies and urgent operational needs.',
+    'svc.org_lbl': 'Clearances and dispatches with the authorities',
+    'svc.org_list': '<span>ANVISA</span><span>Federal Police</span><span>MAPA</span><span>Federal Revenue</span><span>ANTAQ</span><span>Port Authority</span><span>OGMO</span><span>Maritime Court</span>',
     'gallery.lbl': '— Operations',
     'areas.title': 'Areas of operation',
-    'areas.sub': 'Strategic presence at the main terminals and routes of the southeast.',
-    'areas.1t': 'Port of Rio de Janeiro', 'areas.1d': 'Operations at the Commercial Quay, bulk and general cargo terminals, with access to all berths.',
-    'areas.2t': 'Port of Itaguaí', 'areas.2d': 'Service at the CSN, Ternium, TECON and Sepetiba terminals for heavy cargo and containers.',
-    'areas.3t': 'Marina da Glória', 'areas.3d': 'Support for yachts, leisure vessels and diplomatic ships in Guanabara Bay.',
-    'areas.4t': 'Inner Roads RJ', 'areas.4d': 'Bunkering and supply operations at anchorage in the inner waters of the Bay.',
+    'areas.sub': 'Strategic presence at the main ports and terminals of the southeast.',
+    'areas.term_lbl': 'Terminals', 'areas.cargo_lbl': 'Main cargoes',
+    'areas.1t': 'Port of Rio de Janeiro', 'areas.1d': '31 berths, 6.7 km of quay and 1 million m² of operational area. Fuel supply at anchorage and alongside.',
+    'areas.1term': 'Commercial Quay and bulk terminals',
+    'areas.1c': '<span>Wheat</span><span>Steel products</span><span>Tar</span><span>Pig iron</span><span>Fertilizers</span><span>Containers</span><span>Project cargo</span>',
+    'areas.2t': 'Port of Itaguaí', 'areas.2d': 'Modern terminals focused on coal imports and iron ore exports from inland regions, also handling containers and bulk.',
+    'areas.2term': 'Sepetiba Tecon · CPBS · CSN',
+    'areas.2c': '<span>Coal</span><span>Iron ore</span><span>Containers</span><span>General cargo</span><span>Bulk</span>',
+    'areas.3t': 'Sepetiba Bay', 'areas.3d': 'Terminals outside the Itaguaí port complex but within the bay, with strong import and export of minerals and steel products.',
+    'areas.3term': 'Ternium Brasil · Porto Sudeste',
+    'areas.3c': '<span>Coal</span><span>Iron ore</span><span>Limestone</span><span>Steel slab</span><span>Bulk</span>',
+    'areas.4t': 'Ilha Grande Bay', 'areas.4d': 'Ilha Guaíba Terminal (TIG), operated by Vale S/A in Mangaratiba, about 130 km from Rio. Two berths equipped with ship loaders.',
+    'areas.4term': 'TIG — Ilha Guaíba (Vale S/A)',
+    'areas.4c': '<span>Iron ore</span>',
+    'areas.5t': 'Port of Açu', 'areas.5d': 'Port complex spanning 130 km² with 9 offshore and onshore terminals, managed by Prumo Logística.',
+    'areas.5term': '9 terminals (Prumo Logística)',
+    'areas.5c': '<span>Iron ore</span><span>Gas</span><span>Oil</span><span>Fertilizers</span><span>Coal</span><span>Coke</span><span>Bauxite</span><span>Project cargo</span>',
+    'areas.6t': 'Port of Forno', 'areas.6d': 'Port in Arraial do Cabo operated by TPAR (Splenda Offshore group), focused on offshore operations support.',
+    'areas.6term': 'Operated by TPAR',
+    'areas.6c': '<span>Offshore support</span>',
+    'areas.7t': 'Angra dos Reis', 'areas.7d': 'Operation controlled by TPAR, with infrastructure for offshore support, bonded yard and cargo storage.',
+    'areas.7term': 'Operated by TPAR',
+    'areas.7c': '<span>Offshore support</span><span>Bonded yard</span><span>Storage</span>',
+    'areas.8t': 'Marina da Glória', 'areas.8d': 'Support for yachts, leisure vessels and diplomatic ships in Guanabara Bay.',
+    'areas.8c': '<span>Yachts</span><span>Leisure</span><span>Diplomatic vessels</span>',
+    'areas.9t': 'Inner Roads RJ', 'areas.9d': 'Bunkering and supply operations at anchorage in the inner waters of the Bay.',
+    'areas.9c': '<span>Bunkering</span><span>Supplies</span><span>Anchorage</span>',
     'certs.lbl': 'Certifications &amp; Partnerships',
     'contact.tag': 'Contact',
     'contact.title': 'Shall we sail together to the next port?',
@@ -1072,7 +1211,7 @@ const I18N = {
     'contact.sending': 'Sending...',
     'contact.success': "Message sent! We'll get back to you soon.",
     'contact.error': 'Could not send right now. Please try again in a moment.',
-    'contact.loc_label': 'Location', 'contact.loc_val': 'Rio de Janeiro, Brazil', 'contact.web_label': 'Website',
+    'contact.loc_label': 'Location', 'contact.loc_val': 'Av. das Américas, 16225 — Suite 303<br>Recreio dos Bandeirantes — Rio de Janeiro / RJ<br>ZIP 22790-701', 'contact.linkedin': 'LinkedIn', 'contact.web_label': 'Website',
     'footer.about': 'Company', 'footer.services': 'Services', 'footer.areas': 'Areas', 'footer.contact': 'Contact',
     'footer.privacy': 'Privacy',
     'footer.rights': '© 2024 SeaShore Solutions. All rights reserved.'
