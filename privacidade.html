@@ -12,8 +12,8 @@
 <title>Política de Privacidade – SeaShore Solutions</title>
 <meta name="description" content="Política de Privacidade da SeaShore Solutions: como tratamos seus dados pessoais conforme a LGPD.">
 <link rel="canonical" href="https://seashoresolutions.com.br/privacidade.html">
-<!-- favicon TEMPORÁRIO (logo 3S); trocar pela definitiva -->
-<link rel="icon" type="image/png" href="assets/img/seashore-3s.png">
+<link rel="icon" type="image/png" href="assets/img/favicon-3s.png">
+<link rel="apple-touch-icon" href="assets/img/favicon-3s.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SeaShore Solutions">
 <meta property="og:title" content="Política de Privacidade – SeaShore Solutions">
@@ -44,8 +44,8 @@ a { color: var(--accent-lt); }
   padding: 1.1rem var(--r-nav);
   background: rgba(10,22,40,.97); border-bottom: 1px solid rgba(196,154,60,.14);
 }
-.bar-logo { font-family: var(--serif); font-size: clamp(.9rem,2.5vw,1.25rem); font-weight: 500; letter-spacing: .12em; color: var(--accent); text-decoration: none; }
-.bar-logo span { color: var(--white); font-weight: 300; }
+.bar-logo { display: inline-flex; align-items: center; text-decoration: none; }
+.bar-logo img { height: 36px; width: auto; display: block; }
 .bar-right { display: flex; align-items: center; gap: 1.2rem; }
 .back { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color .25s; }
 .back:hover { color: var(--accent-lt); }
@@ -68,8 +68,8 @@ h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(2rem,5vw,3.2r
 .policy [hidden] { display: none; }
 
 footer { background: var(--deep); border-top: 1px solid rgba(196,154,60,.13); padding: 2rem var(--r-nav); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
-.f-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; letter-spacing: .12em; color: var(--accent); }
-.f-logo span { color: var(--gray); font-weight: 300; }
+.f-logo { display: inline-flex; align-items: center; }
+.f-logo img { height: 56px; width: auto; display: block; }
 footer small { font-size: .68rem; color: var(--gray); }
 
 :focus-visible { outline: 2px solid var(--accent-lt); outline-offset: 2px; }
@@ -79,7 +79,7 @@ footer small { font-size: .68rem; color: var(--gray); }
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
 <header class="bar">
-  <a href="index.html" class="bar-logo">SeaShore <span>Solutions</span></a>
+  <a href="index.html" class="bar-logo" aria-label="SeaShore Solutions"><img src="assets/img/logo-mark-light.png" alt="SeaShore Solutions"></a>
   <div class="bar-right">
     <a href="index.html" class="back" data-i18n="back">Voltar ao site</a>
     <div class="lang-switch" role="group" aria-label="Idioma / Language">
@@ -118,7 +118,7 @@ footer small { font-size: .68rem; color: var(--gray); }
 </main>
 
 <footer>
-  <div class="f-logo">SeaShore <span>Solutions</span></div>
+  <div class="f-logo"><img src="assets/img/logo-3s-light.png" alt="SeaShore Solutions"></div>
   <small data-i18n="rights">© 2024 SeaShore Solutions. Todos os direitos reservados.</small>
 </footer>
 

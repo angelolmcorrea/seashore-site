@@ -9,7 +9,8 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://seashoresolutions.com.br/">
 <!-- favicon TEMPORÁRIO (logo 3S do site atual); trocar pela logo definitiva do cliente -->
-<link rel="icon" type="image/png" href="assets/img/seashore-3s.png">
+<link rel="icon" type="image/png" href="assets/img/favicon-3s.png">
+<link rel="apple-touch-icon" href="assets/img/favicon-3s.png">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SeaShore Solutions">
@@ -31,7 +32,7 @@
   "@type": "Organization",
   "name": "SeaShore Solutions",
   "url": "https://seashoresolutions.com.br/",
-  "logo": "https://seashoresolutions.com.br/assets/img/seashore-3s.png",
+  "logo": "https://seashoresolutions.com.br/assets/img/logo-3s.png",
   "description": "Agência marítima no Rio de Janeiro desde 2013.",
   "foundingDate": "2013",
   "address": { "@type": "PostalAddress", "addressLocality": "Rio de Janeiro", "addressCountry": "BR" },
@@ -91,12 +92,8 @@ a { color: inherit; }
 }
 #mainNav.scrolled { background: rgba(10,22,40,.97); box-shadow: 0 1px 0 rgba(196,154,60,.12); }
 
-.nav-logo {
-  font-family: var(--serif); font-size: clamp(.9rem, 2.5vw, 1.25rem);
-  font-weight: 500; letter-spacing: .12em; color: var(--accent);
-  text-decoration: none; white-space: nowrap;
-}
-.nav-logo span { color: var(--white); font-weight: 300; }
+.nav-logo { display: inline-flex; align-items: center; text-decoration: none; }
+.nav-logo img { height: 38px; width: auto; display: block; }
 
 .nav-links {
   display: flex; gap: clamp(1rem, 3vw, 2.5rem); list-style: none;
@@ -265,6 +262,12 @@ a { color: inherit; }
   content:''; position:absolute; inset:0;
   background: linear-gradient(to right, transparent 55%, var(--navy));
 }
+.about-logo {
+  position: absolute; top: 2rem; right: 2rem; z-index: 2;
+  background: #fff; border-radius: 8px; padding: .9rem 1.1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+.about-logo img { width: clamp(110px, 13vw, 170px); display: block; }
 .about-yr {
   position: absolute; bottom: 2.5rem; left: 2.5rem; z-index: 2;
   font-family: var(--serif); font-size: clamp(4rem, 8vw, 7rem);
@@ -602,11 +605,8 @@ footer {
   justify-content: space-between; align-items: center;
   gap: 1.5rem;
 }
-.f-logo {
-  font-family: var(--serif); font-size: 1.05rem;
-  font-weight: 500; letter-spacing: .12em; color: var(--accent);
-}
-.f-logo span { color: var(--gray); font-weight: 300; }
+.f-logo { display: inline-flex; align-items: center; }
+.f-logo img { height: 64px; width: auto; display: block; }
 .f-nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
 .f-nav a {
   font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
@@ -720,7 +720,7 @@ footer small { font-size: .68rem; color: var(--gray); }
 
 <!-- ── NAV ── -->
 <nav id="mainNav">
-  <a href="#" class="nav-logo">SeaShore <span>Solutions</span></a>
+  <a href="#" class="nav-logo" aria-label="SeaShore Solutions"><img src="assets/img/logo-mark-light.png" alt="SeaShore Solutions"></a>
   <ul class="nav-links">
     <li><a href="#about"    data-i18n="nav.about">A Empresa</a></li>
     <li><a href="#services" data-i18n="nav.services">Serviços</a></li>
@@ -785,6 +785,7 @@ footer small { font-size: .68rem; color: var(--gray); }
 <!-- ── ABOUT ── -->
 <section class="about" id="about">
   <div class="about-img">
+    <div class="about-logo"><img src="assets/img/logo-3s.png" alt="SeaShore Solutions"></div>
     <div class="about-yr">2013</div>
   </div>
   <div class="about-text fade-up">
@@ -1122,7 +1123,7 @@ footer small { font-size: .68rem; color: var(--gray); }
 
 <!-- ── FOOTER ── -->
 <footer>
-  <div class="f-logo">SeaShore <span>Solutions</span></div>
+  <div class="f-logo"><img src="assets/img/logo-3s-light.png" alt="SeaShore Solutions"></div>
   <nav class="f-nav">
     <a href="#about"    data-i18n="footer.about">Empresa</a>
     <a href="#services" data-i18n="footer.services">Serviços</a>
