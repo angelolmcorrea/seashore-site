@@ -457,6 +457,8 @@ a { color: inherit; }
   filter: grayscale(1); opacity: .82; transition: filter .35s, opacity .35s;
 }
 .partner:hover img { filter: none; opacity: 1; }
+.partner-name { color: var(--navy); font-weight: 600; font-size: .82rem; text-align: center; line-height: 1.3; opacity: .85; transition: opacity .35s; }
+.partner:hover .partner-name { opacity: 1; }
 @media (max-width: 1100px) { .partners-grid { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 700px)  { .partners-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 460px)  { .partners-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; } }
@@ -592,7 +594,7 @@ a { color: inherit; }
 .cblock a:hover { color: var(--accent-lt); }
 .cblock .sep { color: var(--gray); margin: 0 .35rem; }
 .cblock span { font-size: .86rem; color: var(--white); line-height: 1.5; }
-.contact-linkedin { display: inline-block; margin-top: .7rem; font-size: .86rem; }
+.contact-linkedin { display: flex; align-items: center; gap: .4rem; width: fit-content; margin-top: .8rem; font-size: .86rem; }
 
 /* ═══════════════════════════════════════
    FOOTER
@@ -933,7 +935,7 @@ footer small { font-size: .68rem; color: var(--gray); }
       <span class="area-meta-lbl" data-i18n="areas.term_lbl">Terminais</span>
       <p class="area-terminals" data-i18n="areas.1term">Cais Comercial e terminais de granéis</p>
       <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
-      <div class="cargo-tags" data-i18n="areas.1c"><span>Trigo</span><span>Siderúrgicos</span><span>Breu</span><span>Ferro-gusa</span><span>Fertilizantes</span><span>Contêineres</span><span>Project cargo</span></div>
+      <div class="cargo-tags" data-i18n="areas.1c"><span>Trigo</span><span>Produtos Siderúrgicos</span><span>Ferro-gusa</span><span>Fertilizantes</span><span>Contêineres</span><span>Óleo e Gás</span><span>Carga de Projeto</span></div>
     </div>
     <div class="area-card fade-up d1">
       <div class="area-dot"></div>
@@ -942,7 +944,7 @@ footer small { font-size: .68rem; color: var(--gray); }
       <span class="area-meta-lbl" data-i18n="areas.term_lbl">Terminais</span>
       <p class="area-terminals" data-i18n="areas.2term">Sepetiba Tecon · CPBS · CSN</p>
       <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
-      <div class="cargo-tags" data-i18n="areas.2c"><span>Carvão</span><span>Minério de ferro</span><span>Contêineres</span><span>Carga geral</span><span>Granéis</span></div>
+      <div class="cargo-tags" data-i18n="areas.2c"><span>Carvão</span><span>Minério de ferro</span><span>Contêineres</span><span>Carga geral</span><span>Granéis diversos</span></div>
     </div>
     <div class="area-card fade-up d2">
       <div class="area-dot"></div>
@@ -951,7 +953,7 @@ footer small { font-size: .68rem; color: var(--gray); }
       <span class="area-meta-lbl" data-i18n="areas.term_lbl">Terminais</span>
       <p class="area-terminals" data-i18n="areas.3term">Ternium Brasil · Porto Sudeste</p>
       <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
-      <div class="cargo-tags" data-i18n="areas.3c"><span>Carvão</span><span>Minério de ferro</span><span>Calcário</span><span>Placas de aço</span><span>Granéis</span></div>
+      <div class="cargo-tags" data-i18n="areas.3c"><span>Carvão</span><span>Minério de ferro</span><span>Calcário</span><span>Placas de aço</span><span>Granéis diversos</span></div>
     </div>
     <div class="area-card fade-up">
       <div class="area-dot"></div>
@@ -965,20 +967,20 @@ footer small { font-size: .68rem; color: var(--gray); }
     <div class="area-card fade-up d1">
       <div class="area-dot"></div>
       <h4 data-i18n="areas.5t">Porto do Açu</h4>
-      <p data-i18n="areas.5d">Numa área de 130 km² e operando em 9 terminais offshore e onshore, administrado pela Prumo Logística Global, o Porto do Açu tem capacidade para movimentar um abrangente leque de cargas.</p>
+      <p data-i18n="areas.5d">Numa área de 130 km² e operando em terminais offshore e onshore, administrado pela Prumo Logística Global, o Porto do Açu tem capacidade para movimentar um abrangente leque de cargas.</p>
       <span class="area-meta-lbl" data-i18n="areas.term_lbl">Terminais</span>
-      <p class="area-terminals" data-i18n="areas.5term">9 terminais (Prumo Logística)</p>
+      <p class="area-terminals" data-i18n="areas.5term">TMULT · T-OIL · T-ORE · Bases Offshore</p>
       <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
-      <div class="cargo-tags" data-i18n="areas.5c"><span>Minério de ferro</span><span>Gás</span><span>Petróleo</span><span>Fertilizantes</span><span>Carvão</span><span>Coque</span><span>Bauxita</span><span>Project cargo</span></div>
+      <div class="cargo-tags" data-i18n="areas.5c"><span>Minério de ferro</span><span>Soja</span><span>Milho</span><span>Gás</span><span>Petróleo</span><span>Fertilizantes</span><span>Carvão</span><span>Coque</span><span>Bauxita</span><span>Carga de Projeto</span></div>
     </div>
     <div class="area-card fade-up d2">
       <div class="area-dot"></div>
       <h4 data-i18n="areas.6t">Porto do Forno</h4>
-      <p data-i18n="areas.6d">Arrendado pela investidora Splenda Offshore, o porto de Forno é operado pela TPAR.</p>
+      <p data-i18n="areas.6d">Arrendado pela investidora Splenda Offshore, o porto de Forno é administrado pela PortosRio.</p>
       <span class="area-meta-lbl" data-i18n="areas.term_lbl">Terminais</span>
-      <p class="area-terminals" data-i18n="areas.6term">Operado pela TPAR</p>
+      <p class="area-terminals" data-i18n="areas.6term">Administração pela PortosRio</p>
       <span class="area-meta-lbl" data-i18n="areas.cargo_lbl">Principais cargas</span>
-      <div class="cargo-tags" data-i18n="areas.6c"><span>Apoio offshore</span></div>
+      <div class="cargo-tags" data-i18n="areas.6c"><span>Apoio offshore</span><span>Sal</span><span>Malte</span></div>
     </div>
     <div class="area-card fade-up">
       <div class="area-dot"></div>
@@ -1019,11 +1021,11 @@ footer small { font-size: .68rem; color: var(--gray); }
     <div class="partner"><img src="assets/img/partners/alphamar.jpg" alt="Alphamar" loading="lazy"></div>
     <div class="partner"><img src="assets/img/partners/transmarine.png" alt="Transmarine Shipping" loading="lazy"></div>
     <div class="partner"><img src="assets/img/partners/mapamar.png" alt="Mapamar" loading="lazy"></div>
-    <div class="partner"><img src="assets/img/partners/oceanboat.png" alt="Ocean Boat" loading="lazy"></div>
+    <div class="partner"><img src="assets/img/partners/montserrat.png" alt="Montserrat" loading="lazy"></div>
     <div class="partner"><img src="assets/img/partners/oceansafer.png" alt="Ocean Safer" loading="lazy"></div>
     <div class="partner"><img src="assets/img/partners/jaf.png" alt="JAF" loading="lazy"></div>
     <div class="partner"><img src="assets/img/partners/fertimport.jpg" alt="Fertimport" loading="lazy"></div>
-    <div class="partner"><img src="assets/img/partners/derektas.png" alt="Derektas" loading="lazy"></div>
+    <div class="partner"><span class="partner-name">Oceanfreight Services LTDA</span></div>
     <div class="partner"><img src="assets/img/partners/camorin.png" alt="Camorin" loading="lazy"></div>
   </div>
 </section>
@@ -1115,7 +1117,10 @@ footer small { font-size: .68rem; color: var(--gray); }
       <div class="cblock">
         <label data-i18n="contact.loc_label">Localização</label>
         <span data-i18n="contact.loc_val">Av. das Américas, 16225 — Sala 303<br>Recreio dos Bandeirantes — Rio de Janeiro / RJ<br>CEP 22790-701</span>
-        <a class="contact-linkedin" href="https://www.linkedin.com/company/seashore-solutions/" target="_blank" rel="noopener" data-i18n="contact.linkedin">LinkedIn</a>
+        <a class="contact-linkedin" href="https://www.linkedin.com/company/seashore-solutions/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          <span data-i18n="contact.linkedin">LinkedIn</span>
+        </a>
       </div>
     </div>
   </div>
@@ -1176,22 +1181,22 @@ const I18N = {
     'areas.term_lbl': 'Terminais', 'areas.cargo_lbl': 'Principais cargas',
     'areas.1t': 'Porto do Rio de Janeiro', 'areas.1d': 'O porto do Rio de Janeiro possui 31 berços com extensão de 6,7 km de cais acostável em uma área operacional de 1 milhão de m². Além disso o porto tem estrutura para fornecimento de combustível tanto em áreas de fundeio quanto em navios atracados.',
     'areas.1term': 'Cais Comercial e terminais de granéis',
-    'areas.1c': '<span>Trigo</span><span>Siderúrgicos</span><span>Breu</span><span>Ferro-gusa</span><span>Fertilizantes</span><span>Contêineres</span><span>Project cargo</span>',
+    'areas.1c': '<span>Trigo</span><span>Produtos Siderúrgicos</span><span>Ferro-gusa</span><span>Fertilizantes</span><span>Contêineres</span><span>Óleo e Gás</span><span>Carga de Projeto</span>',
     'areas.2t': 'Porto de Itaguaí', 'areas.2d': 'Com modernos terminais e infraestruturas de ponta, Itaguaí é um dos principais portos para a importação de carvão e escoamento da produção de minério de ferro do interior do país. O porto também conta com terminal para container, além de movimentar carga geral e granéis diversos.',
     'areas.2term': 'Sepetiba Tecon · CPBS · CSN',
-    'areas.2c': '<span>Carvão</span><span>Minério de ferro</span><span>Contêineres</span><span>Carga geral</span><span>Granéis</span>',
+    'areas.2c': '<span>Carvão</span><span>Minério de ferro</span><span>Contêineres</span><span>Carga geral</span><span>Granéis diversos</span>',
     'areas.3t': 'Baía de Sepetiba', 'areas.3d': 'Fora do complexo de portos de Itaguaí mas ainda dentro da Baía de Sepetiba, os terminais Ternium Brasil e Porto Sudeste têm participação importante no volume de importação e exportação de minérios, carvão e steel slab da região.',
     'areas.3term': 'Ternium Brasil · Porto Sudeste',
-    'areas.3c': '<span>Carvão</span><span>Minério de ferro</span><span>Calcário</span><span>Placas de aço</span><span>Granéis</span>',
+    'areas.3c': '<span>Carvão</span><span>Minério de ferro</span><span>Calcário</span><span>Placas de aço</span><span>Granéis diversos</span>',
     'areas.4t': 'Baía de Ilha Grande', 'areas.4d': 'Localizado no município de Mangaratiba/RJ, o Terminal de Ilha Guaíba (TIG) da Vale S/A da baía de Ilha Grande, fica a cerca de 130 quilômetros da cidade do Rio de Janeiro. O terminal possui 2 berços e opera com ship loaders.',
     'areas.4term': 'TIG — Ilha Guaíba (Vale S/A)',
     'areas.4c': '<span>Minério de ferro</span>',
-    'areas.5t': 'Porto do Açu', 'areas.5d': 'Numa área de 130 km² e operando em 9 terminais offshore e onshore, administrado pela Prumo Logística Global, o Porto do Açu tem capacidade para movimentar um abrangente leque de cargas.',
-    'areas.5term': '9 terminais (Prumo Logística)',
-    'areas.5c': '<span>Minério de ferro</span><span>Gás</span><span>Petróleo</span><span>Fertilizantes</span><span>Carvão</span><span>Coque</span><span>Bauxita</span><span>Project cargo</span>',
-    'areas.6t': 'Porto do Forno', 'areas.6d': 'Arrendado pela investidora Splenda Offshore, o porto de Forno é operado pela TPAR.',
-    'areas.6term': 'Operado pela TPAR',
-    'areas.6c': '<span>Apoio offshore</span>',
+    'areas.5t': 'Porto do Açu', 'areas.5d': 'Numa área de 130 km² e operando em terminais offshore e onshore, administrado pela Prumo Logística Global, o Porto do Açu tem capacidade para movimentar um abrangente leque de cargas.',
+    'areas.5term': 'TMULT · T-OIL · T-ORE · Bases Offshore',
+    'areas.5c': '<span>Minério de ferro</span><span>Soja</span><span>Milho</span><span>Gás</span><span>Petróleo</span><span>Fertilizantes</span><span>Carvão</span><span>Coque</span><span>Bauxita</span><span>Carga de Projeto</span>',
+    'areas.6t': 'Porto do Forno', 'areas.6d': 'Arrendado pela investidora Splenda Offshore, o porto de Forno é administrado pela PortosRio.',
+    'areas.6term': 'Administração pela PortosRio',
+    'areas.6c': '<span>Apoio offshore</span><span>Sal</span><span>Malte</span>',
     'areas.7t': 'Angra dos Reis', 'areas.7d': 'Controlado pela TPAR, o porto disponibiliza boa estrutura para operações offshore, além de pátio alfandegado e área para armazenagem de carga.',
     'areas.7term': 'Operado pela TPAR',
     'areas.7c': '<span>Apoio offshore</span><span>Pátio alfandegado</span><span>Armazenagem</span>',
@@ -1256,22 +1261,22 @@ const I18N = {
     'areas.term_lbl': 'Terminals', 'areas.cargo_lbl': 'Main cargoes',
     'areas.1t': 'Port of Rio de Janeiro', 'areas.1d': 'The Port of Rio de Janeiro has 31 berths with an extension of 6.7 km of berth quay in an operational area of 1 million m². In addition, the port has a structure for fuel supply both in anchorage areas and in berthed ships.',
     'areas.1term': 'Commercial Quay and bulk terminals',
-    'areas.1c': '<span>Wheat</span><span>Steel products</span><span>Tar</span><span>Pig iron</span><span>Fertilizers</span><span>Containers</span><span>Project cargo</span>',
+    'areas.1c': '<span>Wheat</span><span>Steel products</span><span>Pig iron</span><span>Fertilizers</span><span>Containers</span><span>Oil &amp; Gas</span><span>Project cargo</span>',
     'areas.2t': 'Port of Itaguaí', 'areas.2d': 'With modern terminals and cutting-edge infrastructure, Itaguaí is one of the main ports for coal importation and the flow of iron ore production from the countryside. The port also has a container terminal, aside from handling general cargo and general bulk cargoes.',
     'areas.2term': 'Sepetiba Tecon · CPBS · CSN',
-    'areas.2c': '<span>Coal</span><span>Iron ore</span><span>Containers</span><span>General cargo</span><span>Bulk</span>',
+    'areas.2c': '<span>Coal</span><span>Iron ore</span><span>Containers</span><span>General cargo</span><span>General bulk cargoes</span>',
     'areas.3t': 'Sepetiba Bay', 'areas.3d': 'Outside the Itaguaí port complex but still within the Sepetiba Bay, the Ternium Brasil and Porto Sudeste terminals have important share in the region\'s ore, coal, and steel slab volume of imports and exports.',
     'areas.3term': 'Ternium Brasil · Porto Sudeste',
-    'areas.3c': '<span>Coal</span><span>Iron ore</span><span>Limestone</span><span>Steel slab</span><span>Bulk</span>',
+    'areas.3c': '<span>Coal</span><span>Iron ore</span><span>Limestone</span><span>Steel slab</span><span>General bulk cargoes</span>',
     'areas.4t': 'Ilha Grande Bay', 'areas.4d': 'Located in the municipality of Mangaratiba/RJ, the Ilha Guaíba Terminal (TIG) of Vale S/A in the Ilha Grande Bay is located about 130 km from the city of Rio de Janeiro. The terminal has 2 berths and operates with ship loaders.',
     'areas.4term': 'TIG — Ilha Guaíba (Vale S/A)',
     'areas.4c': '<span>Iron ore</span>',
-    'areas.5t': 'Port of Açu', 'areas.5d': 'In an area of 130 km² and operating in 9 offshore and onshore terminals, managed by Prumo Logística Global, Port of Açu has capacity to handle a wide range of cargo.',
-    'areas.5term': '9 terminals (Prumo Logística)',
-    'areas.5c': '<span>Iron ore</span><span>Gas</span><span>Oil</span><span>Fertilizers</span><span>Coal</span><span>Coke</span><span>Bauxite</span><span>Project cargo</span>',
-    'areas.6t': 'Port of Forno', 'areas.6d': 'Leased by the investor Splenda Offshore, the Forno port is operated by TPAR.',
-    'areas.6term': 'Operated by TPAR',
-    'areas.6c': '<span>Offshore support</span>',
+    'areas.5t': 'Port of Açu', 'areas.5d': 'In an area of 130 km² and operating in offshore and onshore terminals, managed by Prumo Logística Global, Port of Açu has capacity to handle a wide range of cargo.',
+    'areas.5term': 'TMULT · T-OIL · T-ORE · Offshore Bases',
+    'areas.5c': '<span>Iron ore</span><span>Soybean</span><span>Corn</span><span>Gas</span><span>Oil</span><span>Fertilizers</span><span>Coal</span><span>Coke</span><span>Bauxite</span><span>Project cargo</span>',
+    'areas.6t': 'Port of Forno', 'areas.6d': 'Leased by the investor Splenda Offshore, the Forno port is managed by PortosRio.',
+    'areas.6term': 'Managed by PortosRio',
+    'areas.6c': '<span>Offshore support</span><span>Salt</span><span>Malt</span>',
     'areas.7t': 'Angra dos Reis', 'areas.7d': 'Controlled by TPAR, the port provides a good structure for offshore operations, aside from a bonded yard and an area for cargo storage.',
     'areas.7term': 'Operated by TPAR',
     'areas.7c': '<span>Offshore support</span><span>Bonded yard</span><span>Storage</span>',
