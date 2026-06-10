@@ -255,19 +255,13 @@ a { color: inherit; }
 }
 .about-img {
   position: relative; min-height: 560px;
-  background: url('assets/img/TTRJ-DischWheat-RiodeJaneiroPort-4.jpg')
+  background: url('assets/img/about-empresa.jpg')
     center/cover no-repeat;
 }
 .about-img::after {
   content:''; position:absolute; inset:0;
   background: linear-gradient(to right, transparent 55%, var(--navy));
 }
-.about-logo {
-  position: absolute; top: 2rem; right: 2rem; z-index: 2;
-  background: #fff; border-radius: 8px; padding: .9rem 1.1rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-}
-.about-logo img { width: clamp(110px, 13vw, 170px); display: block; }
 .about-yr {
   position: absolute; bottom: 2.5rem; left: 2.5rem; z-index: 2;
   font-family: var(--serif); font-size: clamp(4rem, 8vw, 7rem);
@@ -787,7 +781,6 @@ footer small { font-size: .68rem; color: var(--gray); }
 <!-- ── ABOUT ── -->
 <section class="about" id="about">
   <div class="about-img">
-    <div class="about-logo"><img src="assets/img/logo-3s.png" alt="SeaShore Solutions"></div>
     <div class="about-yr">2013</div>
   </div>
   <div class="about-text fade-up">
