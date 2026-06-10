@@ -56,8 +56,7 @@ campos ocultos `subject` / `from_name`.
 - **Tradução EN:** rascunho interno (home + privacidade) — **revisar/validar com o cliente**.
 - **Imagens em baixa resolução:** as fotos da home são 600px (originais do WP).
   Para o hero full-bleed, pedir originais em alta ou substituir por banco.
-- **Montserrat:** o brasão de Montserrat aparecia na página de parceiros do WP; ficou
-  **fora** da seção (não é logo corporativa). Confirmar com o cliente se deve entrar.
+- ~~**Montserrat:** confirmar com o cliente se entra~~ — **cliente pediu incluir (2026-06-10)**; logo em `assets/img/partners/montserrat.png`, na grade de parceiros.
 - Conferir se há conteúdo no WP além da home antes de desligar o plano.
 
 ## Contexto no vault
