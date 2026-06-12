@@ -586,7 +586,9 @@ a { color: inherit; }
 .cblock li strong { display: block; color: var(--white); font-weight: 500; margin-bottom: .15rem; }
 .cblock a { color: var(--white); text-decoration: none; transition: color .3s; }
 .cblock a:hover { color: var(--accent-lt); }
-.cblock .sep { color: var(--gray); margin: 0 .35rem; }
+/* Contatos pessoais: telefone e e-mail empilhados (um por linha) — o número
+   quebrava no hífen quando dividia a linha com o e-mail. */
+.cblock a.stack { display: block; overflow-wrap: anywhere; }
 .cblock span { font-size: .86rem; color: var(--white); line-height: 1.5; }
 .contact-linkedin { display: flex; align-items: center; gap: .4rem; width: fit-content; margin-top: .8rem; font-size: .86rem; }
 
@@ -1099,11 +1101,13 @@ footer small { font-size: .68rem; color: var(--gray); }
         <ul>
           <li>
             <strong>Thiago Tomaz Botelho</strong>
-            <a href="tel:+5521996087802">(21) 99608-7802</a><span class="sep">·</span><a href="mailto:thiagobotelho@seashoresolutions.com.br">thiagobotelho@seashoresolutions.com.br</a>
+            <a class="stack" href="tel:+5521996087802">(21) 99608-7802</a>
+            <a class="stack" href="mailto:thiagobotelho@seashoresolutions.com.br">thiagobotelho@seashoresolutions.com.br</a>
           </li>
           <li>
             <strong>Mário Botelho</strong>
-            <a href="tel:+5521996082054">(21) 99608-2054</a><span class="sep">·</span><a href="mailto:mariobotelho@seashoresolutions.com.br">mariobotelho@seashoresolutions.com.br</a>
+            <a class="stack" href="tel:+5521996082054">(21) 99608-2054</a>
+            <a class="stack" href="mailto:mariobotelho@seashoresolutions.com.br">mariobotelho@seashoresolutions.com.br</a>
           </li>
         </ul>
       </div>
