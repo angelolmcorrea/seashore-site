@@ -32,23 +32,14 @@ Subir o conteúdo da pasta para o `public_html` da conta Hostinger do cliente
 
 A seção de contato usa um formulário (nome, e-mail, mensagem) que envia via
 **Web3Forms** por AJAX, com feedback inline e honeypot anti-spam. Não precisa
-de backend. **Falta 1 passo manual** para ativar:
-
-1. Acessar https://web3forms.com e informar o **e-mail que vai receber** as
-   mensagens (o e-mail de contato real da SeaShore). O serviço envia uma
-   **access key** (gratuita) para esse endereço.
-2. No `index.html`, trocar o valor do campo oculto
-   `name="access_key"` (hoje `COLAR_ACCESS_KEY_WEB3FORMS_AQUI`) pela key recebida.
-3. Testar enviando uma mensagem; ela chega no e-mail cadastrado.
-
-Enquanto a key não for inserida, o envio retorna erro (a mensagem de erro
-amigável já aparece pro usuário). O assunto e o remetente do e-mail estão nos
-campos ocultos `subject` / `from_name`.
+de backend. **ATIVO desde 2026-06-11**: access key vinculada a
+`operations@seashoresolutions.com.br` no campo oculto `access_key` do
+`index.html`. O assunto e o remetente do e-mail estão nos campos ocultos
+`subject` / `from_name`. (Se o destinatário mudar um dia, gerar key nova em
+https://web3forms.com com o e-mail novo e trocar o valor do campo.)
 
 ## Pendências / a resolver antes do go-live
 
-- **Web3Forms:** inserir a access key real (passo acima; destino previsto `operations@`)
-  e confirmar com o cliente.
 - **Política de privacidade é MINUTA** (`privacidade.html`) — **requer revisão jurídica /
   do cliente** antes do go-live.
 - **Favicon definitivo:** hoje usa a logo 3S como temporário; trocar pela logo que o
